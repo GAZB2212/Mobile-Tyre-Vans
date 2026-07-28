@@ -915,7 +915,7 @@ export default function AdminAIConversations() {
                   conv.contact_phone && !conv.marked_contacted
                     ? "border-amber-500/40"
                     : conv.contact_name || conv.contact_phone
-                    ? "border-[#8bc440]/30"
+                    ? "border-accent/30"
                     : ""
                 }
               >
@@ -942,7 +942,7 @@ export default function AdminAIConversations() {
                           {(conv.contact_name || conv.contact_phone) && (
                             <Badge
                               variant="secondary"
-                              className="text-xs bg-[#8bc440]/15 text-[#8bc440]"
+                              className="text-xs bg-accent/15 text-accent"
                             >
                               Contact captured
                             </Badge>
@@ -963,7 +963,7 @@ export default function AdminAIConversations() {
                           {conv.includes_48v && (
                             <Badge
                               variant="secondary"
-                              className="text-xs bg-[#8bc440]/15 text-[#8bc440]"
+                              className="text-xs bg-accent/15 text-accent"
                             >
                               48V
                             </Badge>
@@ -1069,10 +1069,10 @@ export default function AdminAIConversations() {
                       {conv.contact_phone && (
                         <a
                           href={`tel:${conv.contact_phone}`}
-                          className="flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-[#8bc440] transition-colors"
+                          className="flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-accent transition-colors"
                           data-testid={`link-ai-phone-${conv.id}`}
                         >
-                          <Phone className="w-3.5 h-3.5 text-[#8bc440]" />
+                          <Phone className="w-3.5 h-3.5 text-accent" />
                           {conv.contact_phone}
                         </a>
                       )}
@@ -1400,7 +1400,7 @@ export default function AdminAIConversations() {
 
           {/* Dialog header */}
           <div className="flex items-center gap-3 px-5 py-4 border-b shrink-0">
-            <div className="w-9 h-9 rounded-full overflow-hidden ring-2 ring-[#8bc440]/30 shrink-0">
+            <div className="w-9 h-9 rounded-full overflow-hidden ring-2 ring-accent/30 shrink-0">
               <img
                 src={maxAvatarSrc}
                 alt="Max"
@@ -1421,7 +1421,7 @@ export default function AdminAIConversations() {
             <div className="flex flex-wrap gap-1.5 shrink-0">
               {transcriptConv?.includes_48v && (
                 <Badge
-                  className="text-xs bg-[#8bc440]/15 text-[#8bc440] border-[#8bc440]/30"
+                  className="text-xs bg-accent/15 text-accent border-accent/30"
                   variant="outline"
                 >
                   <Zap className="w-3 h-3 mr-1" />
@@ -1558,7 +1558,7 @@ export default function AdminAIConversations() {
                     {cfg.includes48v && (
                       <>
                         <span className="text-muted-foreground shrink-0">48V system</span>
-                        <span className="font-medium text-[#8bc440]">Yes</span>
+                        <span className="font-medium text-accent">Yes</span>
                       </>
                     )}
                     {cfg.ownVan !== null && cfg.ownVan !== undefined && (
@@ -1618,7 +1618,7 @@ export default function AdminAIConversations() {
                   <div
                     className={`max-w-[80%] px-3 py-2 rounded-2xl text-sm leading-relaxed ${
                       m.role === "user"
-                        ? "bg-[#8bc440] text-[#191919] rounded-br-sm"
+                        ? "bg-accent text-accent-foreground rounded-br-sm"
                         : "bg-muted text-foreground rounded-bl-sm"
                     }`}
                   >

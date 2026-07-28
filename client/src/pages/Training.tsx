@@ -179,7 +179,7 @@ export default function Training() {
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link href="/contact">
-                <Button size="lg" className="border-green-600 font-semibold bg-[#8bc440e6] text-[#191919]" data-testid="button-contact-us">
+                <Button size="lg" className="border-green-600 font-semibold bg-accent/90 text-accent-foreground" data-testid="button-contact-us">
                   <GraduationCap className="w-5 h-5 mr-2" />
                   Contact Us About Training
                 </Button>
@@ -456,7 +456,7 @@ export default function Training() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/contact">
-              <Button size="lg" className="bg-[#8bc440e6] text-[#191919] border-green-600 font-semibold" data-testid="button-contact-training">
+              <Button size="lg" className="bg-accent/90 text-accent-foreground border-green-600 font-semibold" data-testid="button-contact-training">
                 <Bell className="w-5 h-5 mr-2" />
                 Register Your Interest
               </Button>

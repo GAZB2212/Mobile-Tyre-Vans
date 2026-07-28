@@ -104,7 +104,7 @@ export default function VanModelPage() {
 
       <div>
         {/* ── Hero ── */}
-        <section className="bg-[#191919] text-white py-16 md:py-24">
+        <section className="bg-primary text-white py-16 md:py-24">
           <div className="container mx-auto px-4 max-w-5xl">
             <nav className="mb-6 text-sm text-white/50 flex items-center gap-1.5 flex-wrap">
               <Link href="/" className="hover:text-white transition-colors">Home</Link>
@@ -114,7 +114,7 @@ export default function VanModelPage() {
               <span className="text-white/80">{van.displayName}</span>
             </nav>
             <div className="flex flex-wrap items-start gap-3 mb-4">
-              <Badge className="bg-[#8bc440] text-[#191919] text-xs font-semibold">{van.roofSpec}</Badge>
+              <Badge className="bg-accent text-accent-foreground text-xs font-semibold">{van.roofSpec}</Badge>
               {van.euroSix && (
                 <Badge variant="outline" className="border-white/30 text-white/80 text-xs">Euro 6 Compliant</Badge>
               )}
@@ -126,7 +126,7 @@ export default function VanModelPage() {
               {van.tagline}
             </p>
             <div className="flex flex-wrap gap-3">
-              <Button asChild size="lg" className="bg-[#8bc440] text-[#191919] hover:bg-[#8bc440]/90 font-semibold">
+              <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
                 <Link href="/configurator/van">
                   Build Your {van.make} Conversion
                   <ArrowRight className="ml-2 w-4 h-4" />
@@ -172,7 +172,7 @@ export default function VanModelPage() {
               <ul className="space-y-3">
                 {van.whyItWorks.map((point) => (
                   <li key={point} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#8bc440] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                     <span className="text-sm">{point}</span>
                   </li>
                 ))}
@@ -210,7 +210,7 @@ export default function VanModelPage() {
                   <ul className="space-y-1.5">
                     {van.popularKits.map((kit) => (
                       <li key={kit} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <span className="text-[#8bc440] font-bold mt-0.5">·</span>
+                        <span className="text-accent font-bold mt-0.5">·</span>
                         {kit}
                       </li>
                     ))}
@@ -222,15 +222,15 @@ export default function VanModelPage() {
         </section>
 
         {/* ── CTA Banner ── */}
-        <section className="bg-[#8bc440] py-12">
+        <section className="bg-accent py-12">
           <div className="container mx-auto px-4 max-w-5xl text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#191919] mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-accent-foreground mb-3">
               Ready to build your {van.make} mobile tyre van?
             </h2>
-            <p className="text-[#191919]/70 mb-6 max-w-xl mx-auto">
+            <p className="text-accent-foreground/70 mb-6 max-w-xl mx-auto">
               Use our online configurator to choose your equipment pack, upgrades, and get an instant quote — or call us on 0800 000 0000.
             </p>
-            <Button asChild size="lg" className="bg-[#191919] text-white hover:bg-[#191919]/90 font-semibold">
+            <Button asChild size="lg" className="bg-primary text-white hover:bg-primary/90 font-semibold">
               <Link href="/configurator/van">
                 Start Configurator <ArrowRight className="ml-2 w-4 h-4" />
               </Link>

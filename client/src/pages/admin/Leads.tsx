@@ -839,7 +839,7 @@ export default function AdminLeads() {
                         <a
                           href={`tel:${lead.phone}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="flex items-center gap-2 text-2xl font-bold text-[#8bc440] hover:text-[#8bc440]/80 transition-colors leading-none"
+                          className="flex items-center gap-2 text-2xl font-bold text-accent hover:text-accent/80 transition-colors leading-none"
                           data-testid={`link-lead-phone-${lead.id}`}
                         >
                           <Phone className="w-5 h-5 shrink-0" />
@@ -858,7 +858,7 @@ export default function AdminLeads() {
                             <span className="hidden md:inline-flex">
                               <Button
                                 size="sm"
-                                className="bg-[#8bc440] text-[#191919] shrink-0"
+                                className="bg-accent text-accent-foreground shrink-0"
                                 disabled={!lead.phone}
                                 onClick={(e) => {
                                   e.stopPropagation();
@@ -1056,7 +1056,7 @@ export default function AdminLeads() {
                           )}
                           <Button
                             size="sm"
-                            className="bg-[#8bc440e6] text-[#191919]"
+                            className="bg-accent/90 text-accent-foreground"
                             onClick={(e) => {
                               e.stopPropagation();
                               window.open("/configurator/van", "_blank");
@@ -1575,7 +1575,7 @@ export default function AdminLeads() {
         <DialogContent className="sm:max-w-sm">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <PhoneCall className="w-4 h-4 text-[#8bc440]" />
+              <PhoneCall className="w-4 h-4 text-accent" />
               Call {callDialog?.customerName}
             </DialogTitle>
           </DialogHeader>
@@ -1615,7 +1615,7 @@ export default function AdminLeads() {
             <Button variant="outline" size="sm" onClick={() => setCallDialog(null)}>Cancel</Button>
             <Button
               size="sm"
-              className="bg-[#8bc440] text-[#191919]"
+              className="bg-accent text-accent-foreground"
               disabled={!selectedStaffPhoneId || !callDialog?.toNumber || initiateCallMutation.isPending}
               onClick={() => {
                 if (!callDialog) return;

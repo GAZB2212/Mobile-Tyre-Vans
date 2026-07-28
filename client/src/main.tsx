@@ -4,7 +4,12 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { HydrationBoundary } from "@tanstack/react-query";
 import App from "./App";
 import { queryClient } from "./lib/queryClient";
+import { applyTheme } from "./lib/applyTheme";
 import "./index.css";
+
+// Apply the deployment's theme before first render so the palette and
+// typography never flash from the defaults.
+applyTheme();
 
 declare global {
   interface Window {

@@ -471,7 +471,7 @@ export default function AdminBlog() {
           <DialogContent className="max-w-md">
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-[#8bc440]" />Generate Blog Post with AI
+                <Sparkles className="w-5 h-5 text-accent" />Generate Blog Post with AI
               </DialogTitle>
             </DialogHeader>
             <div className="space-y-4 py-2">

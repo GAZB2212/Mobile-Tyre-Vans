@@ -337,8 +337,8 @@ export default function AIReview() {
       <div className="border-b bg-card">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-start gap-3">
-            <div className="mt-0.5 bg-[#8bc440]/15 rounded-full p-2 shrink-0">
-              <Zap className="w-5 h-5 text-[#8bc440]" />
+            <div className="mt-0.5 bg-accent/15 rounded-full p-2 shrink-0">
+              <Zap className="w-5 h-5 text-accent" />
             </div>
             <div>
               <h1 className="text-2xl font-bold">Your AI-built configuration</h1>
@@ -347,7 +347,7 @@ export default function AIReview() {
                 adjustments before getting your quote — this is your starting point, not the final word.
               </p>
               {aiConfig?.packageId && (
-                <Badge className="mt-2 bg-[#8bc440]/20 text-[#8bc440] border-[#8bc440]/30" variant="outline">
+                <Badge className="mt-2 bg-accent/20 text-accent border-accent/30" variant="outline">
                   <Layers className="w-3 h-3 mr-1" />
                   {packageLabel[aiConfig.packageId]} package
                 </Badge>
@@ -380,20 +380,20 @@ export default function AIReview() {
                   data-testid={`button-select-kit-${kit.id}`}
                   className={`w-full flex items-start gap-3 rounded-md border p-3 text-left transition-colors ${
                     state.kitId === kit.id
-                      ? "border-[#8bc440] bg-[#8bc440]/10"
+                      ? "border-accent bg-accent/10"
                       : "border-border hover-elevate"
                   }`}
                 >
                   <div className={`mt-0.5 flex-shrink-0 w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                    state.kitId === kit.id ? "border-[#8bc440]" : "border-muted-foreground/40"
+                    state.kitId === kit.id ? "border-accent" : "border-muted-foreground/40"
                   }`}>
-                    {state.kitId === kit.id && <div className="w-2 h-2 rounded-full bg-[#8bc440]" />}
+                    {state.kitId === kit.id && <div className="w-2 h-2 rounded-full bg-accent" />}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
                       <span className="font-medium text-sm">{kit.name}</span>
                       {kit.id === state.kitId && (
-                        <Badge variant="outline" className="text-[10px] text-[#8bc440] border-[#8bc440]/30 py-0">
+                        <Badge variant="outline" className="text-[10px] text-accent border-accent/30 py-0">
                           Selected by AI
                         </Badge>
                       )}
@@ -431,7 +431,7 @@ export default function AIReview() {
                         key={u.id}
                         onClick={() => removeUpgrade(u.id)}
                         data-testid={`button-remove-upgrade-${u.id}`}
-                        className="flex items-center gap-1.5 text-xs bg-[#8bc440]/15 text-[#8bc440] border border-[#8bc440]/30 rounded-md px-2 py-1 hover:bg-red-500/15 hover:text-red-400 hover:border-red-400/30 transition-colors"
+                        className="flex items-center gap-1.5 text-xs bg-accent/15 text-accent border border-accent/30 rounded-md px-2 py-1 hover:bg-red-500/15 hover:text-red-400 hover:border-red-400/30 transition-colors"
                       >
                         <Check className="w-3 h-3" />
                         {label}
@@ -454,7 +454,7 @@ export default function AIReview() {
                   <div key={category}>
                     <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2 flex items-center gap-1.5">
                       {CATEGORY_LABELS[category] ?? category}
-                      {hasSelected && <span className="w-1.5 h-1.5 rounded-full bg-[#8bc440] inline-block" />}
+                      {hasSelected && <span className="w-1.5 h-1.5 rounded-full bg-accent inline-block" />}
                     </p>
                     <div className="space-y-2">
                       {/* Variant groups — one row per parent, with dropdown when selected */}
@@ -468,7 +468,7 @@ export default function AIReview() {
                           <div
                             key={parent.id}
                             className={`rounded-md border p-2.5 transition-colors ${
-                              groupSelected ? "border-[#8bc440]/50 bg-[#8bc440]/5" : "border-border"
+                              groupSelected ? "border-accent/50 bg-accent/5" : "border-border"
                             }`}
                           >
                             <div
@@ -479,7 +479,7 @@ export default function AIReview() {
                               <Checkbox
                                 checked={groupSelected}
                                 onCheckedChange={() => handleToggleGroup(parent.id, variants)}
-                                className="mt-0.5 data-[state=checked]:bg-[#8bc440] data-[state=checked]:border-[#8bc440]"
+                                className="mt-0.5 data-[state=checked]:bg-accent data-[state=checked]:border-accent"
                               />
                               <div className="flex-1 min-w-0">
                                 <div className="flex flex-wrap items-center justify-between gap-1.5">
@@ -536,7 +536,7 @@ export default function AIReview() {
                           <div
                             key={u.id}
                             className={`flex items-start gap-3 rounded-md border p-2.5 cursor-pointer transition-colors ${
-                              selected ? "border-[#8bc440]/50 bg-[#8bc440]/5" : "border-border hover-elevate"
+                              selected ? "border-accent/50 bg-accent/5" : "border-border hover-elevate"
                             }`}
                             onClick={() => handleToggleUpgrade(u.id)}
                             data-testid={`checkbox-upgrade-${u.id}`}
@@ -544,7 +544,7 @@ export default function AIReview() {
                             <Checkbox
                               checked={selected}
                               onCheckedChange={() => handleToggleUpgrade(u.id)}
-                              className="mt-0.5 data-[state=checked]:bg-[#8bc440] data-[state=checked]:border-[#8bc440]"
+                              className="mt-0.5 data-[state=checked]:bg-accent data-[state=checked]:border-accent"
                             />
                             <div className="flex-1 min-w-0">
                               <div className="flex flex-wrap items-center justify-between gap-1.5">
@@ -622,13 +622,13 @@ export default function AIReview() {
                           }}
                           data-testid={`button-finance-${option.value}`}
                           className={`w-full flex items-start gap-3 rounded-md border p-3 text-left transition-colors ${
-                            isSelected ? "border-[#8bc440] bg-[#8bc440]/10" : "border-border hover-elevate"
+                            isSelected ? "border-accent bg-accent/10" : "border-border hover-elevate"
                           }`}
                         >
                           <div className={`mt-0.5 flex-shrink-0 w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                            isSelected ? "border-[#8bc440]" : "border-muted-foreground/40"
+                            isSelected ? "border-accent" : "border-muted-foreground/40"
                           }`}>
-                            {isSelected && <div className="w-2 h-2 rounded-full bg-[#8bc440]" />}
+                            {isSelected && <div className="w-2 h-2 rounded-full bg-accent" />}
                           </div>
                           <div>
                             <p className="font-medium text-sm">{option.label}</p>
@@ -648,16 +648,16 @@ export default function AIReview() {
                                     data-testid={`button-plan-${plan.id}`}
                                     className={`w-full flex items-center gap-2 rounded-md border px-3 py-2 text-left text-sm transition-colors ${
                                       (state.financePlanId === plan.id || (!state.financePlanId && plan === plansForMethod[0]))
-                                        ? "border-[#8bc440] bg-[#8bc440]/10 font-medium"
+                                        ? "border-accent bg-accent/10 font-medium"
                                         : "border-border hover-elevate"
                                     }`}
                                   >
                                     <div className={`flex-shrink-0 w-3 h-3 rounded-full border-2 flex items-center justify-center ${
                                       (state.financePlanId === plan.id || (!state.financePlanId && plan === plansForMethod[0]))
-                                        ? "border-[#8bc440]" : "border-muted-foreground/40"
+                                        ? "border-accent" : "border-muted-foreground/40"
                                     }`}>
                                       {(state.financePlanId === plan.id || (!state.financePlanId && plan === plansForMethod[0])) && (
-                                        <div className="w-1.5 h-1.5 rounded-full bg-[#8bc440]" />
+                                        <div className="w-1.5 h-1.5 rounded-full bg-accent" />
                                       )}
                                     </div>
                                     {plan.name}
@@ -692,7 +692,7 @@ export default function AIReview() {
                                 </div>
                                 <div className="flex justify-between gap-4 border-t pt-2 mt-1 font-bold text-base">
                                   <span>Monthly payment</span>
-                                  <span className="text-[#8bc440]" data-testid="text-monthly-payment">{formatPrice(calc.monthly)}/mo</span>
+                                  <span className="text-accent" data-testid="text-monthly-payment">{formatPrice(calc.monthly)}/mo</span>
                                 </div>
                                 <div className="flex justify-between gap-4 text-xs text-muted-foreground">
                                   <span>Total repayable</span>
@@ -766,7 +766,7 @@ export default function AIReview() {
                     </div>
                     <div className="flex justify-between gap-4 font-bold text-base border-t pt-2 mt-1">
                       <span>Total inc VAT</span>
-                      <span className="text-[#8bc440]" data-testid="text-build-total">{formatPrice(total)}</span>
+                      <span className="text-accent" data-testid="text-build-total">{formatPrice(total)}</span>
                     </div>
                   </div>
 
@@ -785,7 +785,7 @@ export default function AIReview() {
             <Button
               onClick={handleProceed}
               data-testid="button-get-quote"
-              className="w-full bg-[#8bc440e6] text-[#191919] hover:bg-[#8bc440] font-semibold text-base h-12"
+              className="w-full bg-accent/90 text-accent-foreground hover:bg-accent font-semibold text-base h-12"
             >
               Get my quote
               <ArrowRight className="w-5 h-5 ml-2" />

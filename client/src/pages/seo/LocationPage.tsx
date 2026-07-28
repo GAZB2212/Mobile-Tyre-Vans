@@ -97,7 +97,7 @@ export default function LocationPage() {
 
       <div>
         {/* ── Hero ── */}
-        <section className="bg-[#191919] text-white py-16 md:py-24">
+        <section className="bg-primary text-white py-16 md:py-24">
           <div className="container mx-auto px-4 max-w-5xl">
             <nav className="mb-6 text-sm text-white/50 flex items-center gap-1.5 flex-wrap">
               <Link href="/" className="hover:text-white transition-colors">Home</Link>
@@ -107,7 +107,7 @@ export default function LocationPage() {
               <span className="text-white/80">{location.name}</span>
             </nav>
             <div className="flex flex-wrap items-center gap-3 mb-4">
-              <Badge className="bg-[#8bc440] text-[#191919] text-xs font-semibold flex items-center gap-1">
+              <Badge className="bg-accent text-accent-foreground text-xs font-semibold flex items-center gap-1">
                 <MapPin className="w-3 h-3" />
                 {location.region}
               </Badge>
@@ -120,7 +120,7 @@ export default function LocationPage() {
               Professional L3H3 mobile tyre van builds delivered to {location.name}. Choose your van, select your equipment pack, and we deliver your completed conversion to your door.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Button asChild size="lg" className="bg-[#8bc440] text-[#191919] hover:bg-[#8bc440]/90 font-semibold">
+              <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
                 <Link href="/configurator/van">
                   Start Your Build <ArrowRight className="ml-2 w-4 h-4" />
                 </Link>
@@ -177,7 +177,7 @@ export default function LocationPage() {
                 <Card>
                   <CardContent className="pt-6">
                     <h3 className="font-semibold mb-4 flex items-center gap-2">
-                      <Truck className="w-4 h-4 text-[#8bc440]" />
+                      <Truck className="w-4 h-4 text-accent" />
                       What's Included
                     </h3>
                     <ul className="space-y-2">
@@ -190,7 +190,7 @@ export default function LocationPage() {
                         "Delivery to your door",
                       ].map((item) => (
                         <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <CheckCircle2 className="w-4 h-4 text-[#8bc440] shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-0.5" />
                           {item}
                         </li>
                       ))}
@@ -215,15 +215,15 @@ export default function LocationPage() {
         </section>
 
         {/* ── CTA Banner ── */}
-        <section className="bg-[#8bc440] py-12">
+        <section className="bg-accent py-12">
           <div className="container mx-auto px-4 max-w-5xl text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#191919] mb-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-accent-foreground mb-3">
               Ready to start your mobile tyre business in {location.name}?
             </h2>
-            <p className="text-[#191919]/70 mb-6 max-w-xl mx-auto">
+            <p className="text-accent-foreground/70 mb-6 max-w-xl mx-auto">
               Use our online configurator to build your perfect van, or call our team on 0800 000 0000 to discuss your requirements.
             </p>
-            <Button asChild size="lg" className="bg-[#191919] text-white hover:bg-[#191919]/90 font-semibold">
+            <Button asChild size="lg" className="bg-primary text-white hover:bg-primary/90 font-semibold">
               <Link href="/configurator/van">
                 Build Your Van <ArrowRight className="ml-2 w-4 h-4" />
               </Link>

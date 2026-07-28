@@ -163,8 +163,8 @@ export default function FinancePortal() {
 
   if (authLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-[#191919]">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#8bc440]" />
+      <div className="flex items-center justify-center min-h-screen bg-primary">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent" />
       </div>
     );
   }
@@ -177,10 +177,10 @@ export default function FinancePortal() {
   return (
     <div className="min-h-screen bg-muted/20">
       {/* Header */}
-      <header className="bg-[#191919] border-b border-white/10 sticky top-0 z-50">
+      <header className="bg-primary border-b border-white/10 sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-7 h-7 rounded bg-[#8bc440] flex items-center justify-center shrink-0">
+            <div className="w-7 h-7 rounded bg-accent flex items-center justify-center shrink-0">
               <Building2 className="w-4 h-4 text-white" />
             </div>
             <div>
@@ -413,7 +413,7 @@ export default function FinancePortal() {
                   <Button
                     onClick={handleSubmit}
                     disabled={updateMutation.isPending}
-                    className="flex-1 bg-[#8bc440] hover:bg-[#7ab035] text-white border-0"
+                    className="flex-1 bg-accent hover:bg-[#7ab035] text-white border-0"
                     data-testid="button-save-decision"
                   >
                     {updateMutation.isPending ? "Saving..." : "Save Decision & Notify MTV"}

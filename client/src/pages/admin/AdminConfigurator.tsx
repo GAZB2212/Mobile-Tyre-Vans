@@ -659,7 +659,7 @@ export default function AdminConfigurator() {
               </Button>
               <Button
                 size="sm"
-                className="bg-[#8bc440e6] text-[#191919] hover:bg-[#8bc440]"
+                className="bg-accent/90 text-accent-foreground hover:bg-accent"
                 disabled={pricing.totalPence === 0}
                 onClick={() => setSaveOpen(true)}
                 data-testid="button-save-as-quote"
@@ -1465,7 +1465,7 @@ export default function AdminConfigurator() {
                 {/* Save button */}
                 <div className="pt-2">
                   <Button
-                    className="w-full bg-[#8bc440e6] text-[#191919] hover:bg-[#8bc440]"
+                    className="w-full bg-accent/90 text-accent-foreground hover:bg-accent"
                     disabled={pricing.totalPence === 0}
                     onClick={() => setSaveOpen(true)}
                     data-testid="button-save-quote-bottom"
@@ -1835,7 +1835,7 @@ export default function AdminConfigurator() {
               Start fresh
             </Button>
             <Button
-              className="w-full sm:w-auto bg-[#8bc440e6] text-[#191919] hover:bg-[#8bc440]"
+              className="w-full sm:w-auto bg-accent/90 text-accent-foreground hover:bg-accent"
               onClick={() => setShowSessionModal(false)}
               data-testid="button-session-continue"
             >
@@ -1906,7 +1906,7 @@ export default function AdminConfigurator() {
           <DialogFooter className="shrink-0 pt-2 border-t">
             <Button variant="outline" onClick={() => setSaveOpen(false)}>Cancel</Button>
             <Button
-              className="bg-[#8bc440e6] text-[#191919] hover:bg-[#8bc440]"
+              className="bg-accent/90 text-accent-foreground hover:bg-accent"
               disabled={!saveForm.userName.trim() || !saveForm.email.trim() || !saveForm.phone.trim() || saveMutation.isPending}
               onClick={() => saveMutation.mutate(saveForm)}
               data-testid="button-confirm-save-quote"

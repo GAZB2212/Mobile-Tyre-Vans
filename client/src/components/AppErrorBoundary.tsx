@@ -48,7 +48,7 @@ export default class AppErrorBoundary extends Component<Props, State> {
       const isChunk = isChunkLoadError(this.state.error!);
 
       return (
-        <div className="min-h-screen bg-[#191919] flex flex-col items-center justify-center gap-6 p-8">
+        <div className="min-h-screen bg-primary flex flex-col items-center justify-center gap-6 p-8">
           <img
             src="/logo.png"
             alt="Mobile Tyre Vans"
@@ -62,7 +62,7 @@ export default class AppErrorBoundary extends Component<Props, State> {
                 ? "The app was recently updated. Please reload to get the latest version."
                 : "The page failed to load. Please try refreshing — if the problem persists, contact us on "}
               {!isChunk && (
-                <a href="tel:08000000000" className="text-[#8bc440] hover:underline">0800 000 0000</a>
+                <a href="tel:08000000000" className="text-accent hover:underline">0800 000 0000</a>
               )}{!isChunk && "."}
             </p>
             <button
@@ -70,7 +70,7 @@ export default class AppErrorBoundary extends Component<Props, State> {
                 sessionStorage.removeItem(RELOAD_FLAG);
                 window.location.reload();
               }}
-              className="px-6 py-2 bg-[#8bc440] text-[#191919] font-semibold rounded-md hover:bg-[#7ab030] transition-colors"
+              className="px-6 py-2 bg-accent text-accent-foreground font-semibold rounded-md hover:bg-[#7ab030] transition-colors"
             >
               Reload page
             </button>

@@ -18,6 +18,8 @@
 // copy and flags, and select it. No other code changes are required.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { THEMES, VERTICAL_DEFAULT_THEME, type ThemeConfig, type ThemeKey } from "./theme";
+
 export type VerticalKey = "tyres" | "camper" | "horsebox" | "generic";
 
 export interface VerticalConfig {
@@ -146,6 +148,8 @@ export interface BrandConfig {
   /** AI assistant persona name. */
   assistantName: string;
   vertical: VerticalConfig;
+  /** Visual identity — palette, typography, shape (see shared/theme.ts). */
+  theme: ThemeConfig;
 }
 
 // Env resolution that works in both runtimes.
@@ -175,6 +179,7 @@ const CLIENT_ENV: Record<string, string | undefined> = (() => {
       BRAND_TWITTER: import.meta.env?.VITE_BRAND_TWITTER,
       BRAND_ASSISTANT_NAME: import.meta.env?.VITE_BRAND_ASSISTANT_NAME,
       SITE_URL: import.meta.env?.VITE_SITE_URL,
+      THEME: import.meta.env?.VITE_THEME,
     };
   } catch {
     return {};
@@ -230,6 +235,10 @@ export const BRAND: BrandConfig = {
   twitterHandle: env("BRAND_TWITTER") ?? BRAND_OVERRIDES.twitterHandle ?? "",
   assistantName: env("BRAND_ASSISTANT_NAME") ?? BRAND_OVERRIDES.assistantName ?? "Max",
   vertical: VERTICALS[ACTIVE_VERTICAL_KEY],
+  // Theme: explicit THEME env wins, else the vertical's default pairing.
+  theme:
+    THEMES[(env("THEME") as ThemeKey | undefined) ?? ("" as ThemeKey)] ??
+    THEMES[VERTICAL_DEFAULT_THEME[ACTIVE_VERTICAL_KEY] ?? "workhorse"],
 };
 
 /** Site base URL for links/SEO. Server-side SITE_URL env wins when set. */

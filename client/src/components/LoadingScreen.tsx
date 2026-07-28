@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import logoPath from "@assets/mtv-logo.svg";
+import BrandLogo from "@/components/BrandLogo";
 
 const DEFAULT_HERO_VIDEO = "/media/hero_vid_optimised.mp4";
 const CACHE_KEY = "heroVideoUrl";
@@ -62,12 +62,7 @@ export default function LoadingScreen() {
       style={{ opacity: isVisible ? 1 : 0 }}
       data-testid="loading-screen"
     >
-      <img
-        src={logoPath}
-        alt="Mobile Tyre Vans"
-        className="w-48 h-48 md:w-64 md:h-64 mb-16 object-contain"
-        data-testid="img-loading-logo"
-      />
+      <BrandLogo size={96} stacked className="mb-16" />
 
       <div className="flex flex-col items-center gap-4">
         {steps.map((step, index) => (

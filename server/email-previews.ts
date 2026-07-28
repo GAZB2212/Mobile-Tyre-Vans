@@ -1,8 +1,8 @@
 import { emailLayout } from './email';
-
-const BRAND_GREEN = '#8bc440';
-const BRAND_DARK = '#191919';
 import { BRAND } from "@shared/brand";
+
+const BRAND_GREEN = BRAND.theme.accentHex;
+const BRAND_DARK = BRAND.theme.darkHex;
 const SITE_DOMAIN = BRAND.domain;
 const BRAND_NAME = BRAND.name;
 const PHONE = '0800 000 0000';

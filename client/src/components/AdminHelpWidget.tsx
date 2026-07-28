@@ -68,7 +68,7 @@ export function AdminHelpWidget() {
       <div className="fixed bottom-5 right-5 z-50 print:hidden">
         {!open && (
           <button
-            className="h-14 w-14 rounded-full shadow-lg overflow-hidden border-2 border-[#8bc440] hover:scale-105 transition-transform focus:outline-none focus:ring-2 focus:ring-[#8bc440] focus:ring-offset-2"
+            className="h-14 w-14 rounded-full shadow-lg overflow-hidden border-2 border-accent hover:scale-105 transition-transform focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
             onClick={() => setOpen(true)}
             data-testid="button-admin-help-open"
             title="Chat with Gaz"
@@ -89,7 +89,7 @@ export function AdminHelpWidget() {
             data-testid="admin-help-panel"
           >
             {/* Header */}
-            <div className="flex items-center gap-2.5 px-3 py-2 bg-[#8bc440] text-white flex-shrink-0">
+            <div className="flex items-center gap-2.5 px-3 py-2 bg-accent text-white flex-shrink-0">
               <img
                 src={gazAvatarSrc}
                 alt="Gaz"
@@ -138,7 +138,7 @@ export function AdminHelpWidget() {
                   <div
                     className={`max-w-[80%] rounded-xl px-3 py-2 text-sm leading-relaxed whitespace-pre-wrap ${
                       msg.role === "user"
-                        ? "bg-[#8bc440] text-white"
+                        ? "bg-accent text-white"
                         : "bg-muted text-foreground"
                     }`}
                   >
@@ -204,7 +204,7 @@ export function AdminHelpWidget() {
                 size="icon"
                 onClick={send}
                 disabled={!input.trim() || loading}
-                className="h-9 w-9 bg-[#8bc440] hover:bg-[#7ab035] text-white border-0 flex-shrink-0"
+                className="h-9 w-9 bg-accent hover:bg-[#7ab035] text-white border-0 flex-shrink-0"
                 data-testid="button-admin-help-send"
               >
                 <Send className="h-4 w-4" />

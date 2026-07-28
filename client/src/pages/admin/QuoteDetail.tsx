@@ -1614,7 +1614,7 @@ export default function AdminQuoteDetail() {
                 Discard Changes
               </Button>
               <AlertDialogAction
-                className="bg-[#8bc440e6] text-[#191919]"
+                className="bg-accent/90 text-accent-foreground"
                 onClick={() => {
                   setShowUnsavedDialog(false);
                   handleSave();
@@ -1961,13 +1961,13 @@ export default function AdminQuoteDetail() {
                         </>
                       )}
                       {status === "awaiting_deposit" && (
-                        <Button size="sm" className="bg-[#8bc440e6] text-[#191919] border-green-600" onClick={() => { setPendingQuickStatus("deposit_taken"); setStatusNoteText(""); }} disabled={quickStatusMutation.isPending} data-testid="button-deposit-taken">
+                        <Button size="sm" className="bg-accent/90 text-accent-foreground border-green-600" onClick={() => { setPendingQuickStatus("deposit_taken"); setStatusNoteText(""); }} disabled={quickStatusMutation.isPending} data-testid="button-deposit-taken">
                           Confirm Deposit Taken
                         </Button>
                       )}
                       {status === "awaiting_finance" && (
                         <>
-                          <Button size="sm" className="bg-[#8bc440e6] text-[#191919] border-green-600" onClick={() => { setPendingQuickStatus("finance_approved"); setStatusNoteText(""); }} disabled={quickStatusMutation.isPending} data-testid="button-finance-approved">
+                          <Button size="sm" className="bg-accent/90 text-accent-foreground border-green-600" onClick={() => { setPendingQuickStatus("finance_approved"); setStatusNoteText(""); }} disabled={quickStatusMutation.isPending} data-testid="button-finance-approved">
                             Finance Approved
                           </Button>
                           <Button size="sm" variant="outline" onClick={() => { setPendingQuickStatus("finance_declined"); setStatusNoteText(""); }} disabled={quickStatusMutation.isPending} data-testid="button-finance-declined">
@@ -1976,12 +1976,12 @@ export default function AdminQuoteDetail() {
                         </>
                       )}
                       {(status === "deposit_taken" || status === "finance_approved") && (
-                        <Button size="sm" className="bg-[#8bc440e6] text-[#191919] border-green-600" onClick={() => { setPendingQuickStatus("in_build"); setStatusNoteText(""); }} disabled={quickStatusMutation.isPending} data-testid="button-move-to-build">
+                        <Button size="sm" className="bg-accent/90 text-accent-foreground border-green-600" onClick={() => { setPendingQuickStatus("in_build"); setStatusNoteText(""); }} disabled={quickStatusMutation.isPending} data-testid="button-move-to-build">
                           Move to Build
                         </Button>
                       )}
                       {(status === "in_build" || status === "in_workshop") && allBuildStagesDone && (
-                        <Button size="sm" className="bg-[#8bc440e6] text-[#191919] border-green-600" onClick={() => { setPendingQuickStatus("completed"); setStatusNoteText(""); }} disabled={quickStatusMutation.isPending} data-testid="button-mark-completed">
+                        <Button size="sm" className="bg-accent/90 text-accent-foreground border-green-600" onClick={() => { setPendingQuickStatus("completed"); setStatusNoteText(""); }} disabled={quickStatusMutation.isPending} data-testid="button-mark-completed">
                           Mark as Completed
                         </Button>
                       )}
@@ -3381,7 +3381,7 @@ export default function AdminQuoteDetail() {
                   <div className="space-y-2">
                     <Label className="text-xs text-muted-foreground uppercase tracking-wide">Step 4 — Send application</Label>
                     <Button
-                      className="w-full bg-[#8bc440e6] text-[#191919] border-green-600"
+                      className="w-full bg-accent/90 text-accent-foreground border-green-600"
                       onClick={() => sendFinanceMutation.mutate()}
                       disabled={!customerConfirmed || sendFinanceMutation.isPending || (isComparison && !quote.chosenOption)}
                       data-testid="button-send-finance"
@@ -3756,7 +3756,7 @@ export default function AdminQuoteDetail() {
                       <CardHeader className="cursor-pointer pb-3 hover-elevate rounded-t-md">
                         <div className="flex items-center justify-between gap-3">
                           <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-[#8bc440]/30 shrink-0">
+                            <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-accent/30 shrink-0">
                               <img src={maxAvatarSrc} alt="Max" className="w-full h-full object-cover object-top" />
                             </div>
                             <div>
@@ -3785,7 +3785,7 @@ export default function AdminQuoteDetail() {
                               )}
                               <div className={`max-w-[80%] px-3 py-2 rounded-2xl text-sm leading-relaxed ${
                                 m.role === "user"
-                                  ? "bg-[#8bc440]/20 text-foreground rounded-br-sm"
+                                  ? "bg-accent/20 text-foreground rounded-br-sm"
                                   : "bg-muted text-foreground rounded-bl-sm"
                               }`}>
                                 {m.content}
@@ -3816,13 +3816,13 @@ export default function AdminQuoteDetail() {
                 <Card data-testid="card-ai-conversation">
                   <CardHeader className="pb-3">
                     <CardTitle className="text-sm flex items-center gap-2">
-                      <Bot className="w-4 h-4 text-[#8bc440]" />
+                      <Bot className="w-4 h-4 text-accent" />
                       Max AI Chat
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3 pt-0">
                     <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-full overflow-hidden ring-1 ring-[#8bc440]/30 shrink-0">
+                      <div className="w-7 h-7 rounded-full overflow-hidden ring-1 ring-accent/30 shrink-0">
                         <img src={maxAvatarSrc} alt="Max" className="w-full h-full object-cover object-top" />
                       </div>
                       <div>
@@ -3836,7 +3836,7 @@ export default function AdminQuoteDetail() {
                       {ai.van_size && <Badge variant="secondary" className="text-xs">{ai.van_size}</Badge>}
                       {ai.van_type && <Badge variant="secondary" className="text-xs capitalize">{ai.van_type}</Badge>}
                       {ai.finance_preference && <Badge variant="secondary" className="text-xs capitalize">{ai.finance_preference}</Badge>}
-                      {(ai.includes_48v ?? ai.includes48v) && <Badge variant="secondary" className="text-xs bg-[#8bc440]/15 text-[#8bc440]">48V</Badge>}
+                      {(ai.includes_48v ?? ai.includes48v) && <Badge variant="secondary" className="text-xs bg-accent/15 text-accent">48V</Badge>}
                     </div>
                     <p className="text-xs text-muted-foreground">{msgs.length} message{msgs.length !== 1 ? "s" : ""} in conversation</p>
                     <Button
@@ -3907,7 +3907,7 @@ export default function AdminQuoteDetail() {
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Admin</p>
                 <Button
                   size="sm"
-                  className="w-full bg-[#8bc440e6] text-[#191919] border-green-600"
+                  className="w-full bg-accent/90 text-accent-foreground border-green-600"
                   onClick={() => sendToDepotMutation.mutate()}
                   disabled={sendToDepotMutation.isPending}
                   data-testid="button-send-to-depot"
@@ -3952,7 +3952,7 @@ export default function AdminQuoteDetail() {
                   {(quote as any).sageInvoiceId ? (
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-[#8bc440]" />
+                        <CheckCircle className="w-4 h-4 text-accent" />
                         <p className="text-sm font-medium">Pushed to Sage</p>
                       </div>
                       {(quote as any).sagePushedAt && (
@@ -4345,7 +4345,7 @@ export default function AdminQuoteDetail() {
             <DialogContent className="max-w-2xl max-h-[85vh] flex flex-col gap-0 p-0" data-testid="dialog-ai-transcript">
               <DialogHeader className="px-5 py-4 border-b shrink-0">
                 <DialogTitle className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-[#8bc440]/30 shrink-0">
+                  <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-accent/30 shrink-0">
                     <img src={maxAvatarSrc} alt="Max" className="w-full h-full object-cover object-top" />
                   </div>
                   Max — Chat with {displayName}
@@ -4358,7 +4358,7 @@ export default function AdminQuoteDetail() {
                   <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                     <div className={`max-w-[80%] rounded-md px-3 py-2 text-sm ${
                       msg.role === "user"
-                        ? "bg-[#8bc440]/15 text-foreground"
+                        ? "bg-accent/15 text-foreground"
                         : "bg-muted text-foreground"
                     }`}>
                       <p className="text-xs font-medium mb-1 opacity-60">

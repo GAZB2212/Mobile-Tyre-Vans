@@ -214,6 +214,12 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
+
+  /* Display typography follows the theme's heading font (see shared/theme.ts).
+     Themes with a serif display face get it everywhere headings render. */
+  h1, h2, h3 {
+    font-family: var(--font-heading, var(--font-sans));
+  }
 }
 
 /**

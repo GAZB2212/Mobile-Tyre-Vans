@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Phone, Mail, MapPin, Shield } from "lucide-react";
 import { SiFacebook, SiInstagram, SiTiktok, SiYoutube } from "react-icons/si";
-import logoImage from "@assets/mtv-logo.svg";
+import BrandLogo from "@/components/BrandLogo";
 import gajoLogo from "@assets/LOGO_1762356342150.webp";
 import { BRAND } from "@shared/brand";
 
@@ -41,11 +41,7 @@ export default function Footer() {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="mb-4">
-              <img
-                src={logoImage}
-                alt={BRAND.name}
-                className="h-16 w-auto"
-              />
+              <BrandLogo size={44} />
             </div>
             <p className="text-primary-foreground/80 mb-4">
               {BRAND.vertical.businessDescription}

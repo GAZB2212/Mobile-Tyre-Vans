@@ -6,7 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient, clearAuthToken } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import logoImage from "@assets/mtv-logo.svg";
+import BrandLogo from "@/components/BrandLogo";
 import { BRAND } from "@shared/brand";
 
 export default function Header() {
@@ -109,11 +109,7 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-3 md:py-4 gap-3 md:gap-4">
           <Link href="/" className="flex items-center flex-shrink-0" data-testid="link-home">
-            <img
-              src={logoImage}
-              alt={BRAND.name}
-              className="h-20 sm:h-24 md:h-16 lg:h-24 xl:h-32 w-auto"
-            />
+            <BrandLogo size={56} className="py-2" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -194,11 +190,7 @@ export default function Header() {
       {/* Drawer Header */}
       <div className="flex items-center justify-between px-5 py-4 border-b border-border">
         <Link href="/" onClick={closeMenu} data-testid="mobile-nav-logo">
-          <img
-            src={logoImage}
-            alt="Mobile Tyre Vans"
-            className="h-14 w-auto"
-          />
+          <BrandLogo size={40} />
         </Link>
         <Button
           variant="ghost"

@@ -77,21 +77,21 @@ export default function ChatBubble() {
       >
         <div className="w-80 rounded-md border border-border bg-background shadow-lg overflow-hidden">
           {/* Header */}
-          <div className="bg-[#8bc440] px-4 py-3 flex items-center justify-between">
+          <div className="bg-accent px-4 py-3 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
                 <MessageCircle className="w-4 h-4 text-white" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-[#191919]">Live Chat</p>
-                <p className="text-xs text-[#191919]/70">Mobile Tyre Vans</p>
+                <p className="text-sm font-semibold text-accent-foreground">Live Chat</p>
+                <p className="text-xs text-accent-foreground/70">Mobile Tyre Vans</p>
               </div>
             </div>
             <Button
               size="icon"
               variant="ghost"
               onClick={handleClose}
-              className="text-[#191919] hover:bg-white/20"
+              className="text-accent-foreground hover:bg-white/20"
               data-testid="button-chat-close"
             >
               <X className="w-4 h-4" />
@@ -101,7 +101,7 @@ export default function ChatBubble() {
           {submitted ? (
             /* Thank-you state */
             <div className="p-6 flex flex-col items-center text-center gap-3">
-              <CheckCircle className="w-10 h-10 text-[#8bc440]" />
+              <CheckCircle className="w-10 h-10 text-accent" />
               <p className="font-semibold text-foreground">Message received!</p>
               <p className="text-sm text-muted-foreground">
                 Thanks for getting in touch. We'll get back to you as soon as possible — usually within a few hours during business hours.
@@ -203,7 +203,7 @@ export default function ChatBubble() {
                   />
                   <Button
                     type="submit"
-                    className="w-full bg-[#8bc440e6] text-[#191919] hover:bg-[#8bc440]"
+                    className="w-full bg-accent/90 text-accent-foreground hover:bg-accent"
                     disabled={mutation.isPending}
                     data-testid="button-chat-send"
                   >
@@ -223,7 +223,7 @@ export default function ChatBubble() {
       {/* Trigger button */}
       <button
         onClick={open ? handleClose : handleOpen}
-        className="w-14 h-14 rounded-full bg-[#8bc440] text-[#191919] shadow-lg flex items-center justify-center transition-transform hover:scale-105 active:scale-95 focus:outline-none"
+        className="w-14 h-14 rounded-full bg-accent text-accent-foreground shadow-lg flex items-center justify-center transition-transform hover:scale-105 active:scale-95 focus:outline-none"
         aria-label="Open live chat"
         data-testid="button-chat-bubble"
       >

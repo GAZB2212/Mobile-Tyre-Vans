@@ -192,9 +192,9 @@ export default function BuildProgress() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#191919] flex items-center justify-center">
+      <div className="min-h-screen bg-primary flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#8bc440] mx-auto" />
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent mx-auto" />
           <p className="mt-3 text-muted-foreground text-sm">Loading build stages...</p>
         </div>
       </div>
@@ -203,17 +203,17 @@ export default function BuildProgress() {
 
   if (isError || !data) {
     return (
-      <div className="min-h-screen bg-[#191919] flex items-center justify-center">
+      <div className="min-h-screen bg-primary flex items-center justify-center">
         <p className="text-muted-foreground text-sm">Build not found. Check the QR code and try again.</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#191919] flex flex-col">
+    <div className="min-h-screen bg-primary flex flex-col">
       {/* Header */}
       <div className="border-b border-border/40 px-4 py-4 flex items-center gap-3">
-        <Wrench className="w-5 h-5 text-[#8bc440] shrink-0" />
+        <Wrench className="w-5 h-5 text-accent shrink-0" />
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold truncate">
             {data.userName}{data.company ? ` — ${data.company}` : ""}
@@ -243,7 +243,7 @@ export default function BuildProgress() {
               autoFocus
               data-testid="input-initials"
             />
-            <Button size="sm" className="h-7 text-xs bg-[#8bc440] text-[#191919]" onClick={handleSaveInitials} data-testid="button-save-initials">
+            <Button size="sm" className="h-7 text-xs bg-accent text-accent-foreground" onClick={handleSaveInitials} data-testid="button-save-initials">
               Save
             </Button>
             <Button size="sm" variant="ghost" className="h-7 text-xs" onClick={() => setEditingInitials(false)}>
@@ -278,7 +278,7 @@ export default function BuildProgress() {
       {/* Progress bar */}
       <div className="h-1.5 bg-muted/40 w-full">
         <div
-          className="h-full bg-[#8bc440] transition-all duration-300"
+          className="h-full bg-accent transition-all duration-300"
           style={{ width: `${progressPct}%` }}
           data-testid="progress-bar"
         />
@@ -288,8 +288,8 @@ export default function BuildProgress() {
       <div className={cn("flex-1 overflow-y-auto px-4 py-4 space-y-2 max-w-lg mx-auto w-full", pendingId && "pb-28")}>
         {allDone ? (
           <div className="flex flex-col items-center gap-3 py-16" data-testid="all-done-banner">
-            <CheckCircle2 className="w-14 h-14 text-[#8bc440]" />
-            <span className="text-xl font-bold text-[#8bc440]">All stages complete</span>
+            <CheckCircle2 className="w-14 h-14 text-accent" />
+            <span className="text-xl font-bold text-accent">All stages complete</span>
             <span className="text-sm text-muted-foreground text-center">
               Every build stage has been ticked off.
             </span>
@@ -317,7 +317,7 @@ export default function BuildProgress() {
                 <div
                   className={cn(
                     "rounded-md",
-                    isComplete && "bg-[#8bc440]/10",
+                    isComplete && "bg-accent/10",
                     isPending && "bg-amber-500/15 ring-2 ring-amber-400/60",
                     !isComplete && !isPending && "bg-muted/20"
                   )}
@@ -331,7 +331,7 @@ export default function BuildProgress() {
                   >
                     <span className="shrink-0">
                       {isComplete ? (
-                        <CheckCircle2 className="w-5 h-5 text-[#8bc440]" />
+                        <CheckCircle2 className="w-5 h-5 text-accent" />
                       ) : isPending ? (
                         <CircleDot className="w-5 h-5 text-amber-400" />
                       ) : (
@@ -370,7 +370,7 @@ export default function BuildProgress() {
                       </Badge>
                     )}
                     {isComplete && !stageInit && (
-                      <span className="w-2 h-2 rounded-full bg-[#8bc440] shrink-0" />
+                      <span className="w-2 h-2 rounded-full bg-accent shrink-0" />
                     )}
                   </button>
 
@@ -405,7 +405,7 @@ export default function BuildProgress() {
                               data-testid={`bom-row-${stage.id}-${i}`}
                             >
                               <div className="min-w-0">
-                                <p className="text-[10px] font-mono text-[#8bc440] leading-tight">{part.sku}</p>
+                                <p className="text-[10px] font-mono text-accent leading-tight">{part.sku}</p>
                                 <p className="text-xs text-foreground leading-snug mt-0.5">{part.description}</p>
                               </div>
                               <span className="text-sm font-semibold text-foreground self-center tabular-nums text-right">{part.quantity}</span>
@@ -425,7 +425,7 @@ export default function BuildProgress() {
       {/* Sticky Save confirmation */}
       {pendingId && (
         <div
-          className="fixed bottom-0 left-0 right-0 z-50 bg-[#191919] border-t border-amber-400/30 px-4 py-4 flex flex-col gap-2 max-w-lg mx-auto"
+          className="fixed bottom-0 left-0 right-0 z-50 bg-primary border-t border-amber-400/30 px-4 py-4 flex flex-col gap-2 max-w-lg mx-auto"
           data-testid="save-confirm-bar"
         >
           <p className="text-xs text-amber-400 text-center font-medium truncate">
@@ -444,7 +444,7 @@ export default function BuildProgress() {
               Cancel
             </Button>
             <Button
-              className="flex-[2] bg-[#8bc440] text-[#191919] font-bold"
+              className="flex-[2] bg-accent text-accent-foreground font-bold"
               onClick={handleConfirmSave}
               disabled={saveMutation.isPending || !initials}
               data-testid="button-save-confirm"

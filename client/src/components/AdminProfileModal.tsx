@@ -100,7 +100,7 @@ export function AdminProfileModal({ user, open, onOpenChange }: AdminProfileModa
           <div className="relative group">
             <Avatar className="w-24 h-24 ring-2 ring-border">
               <AvatarImage src={currentAvatarUrl} alt={displayName} />
-              <AvatarFallback className="text-2xl font-semibold bg-[#8bc440]/15 text-[#8bc440]">
+              <AvatarFallback className="text-2xl font-semibold bg-accent/15 text-accent">
                 {getInitials(user)}
               </AvatarFallback>
             </Avatar>
@@ -151,7 +151,7 @@ export function AdminProfileModal({ user, open, onOpenChange }: AdminProfileModa
               </Button>
               <Button
                 onClick={handleUpload}
-                className="flex-1 bg-[#8bc440] hover:bg-[#8bc440]/90 text-[#191919]"
+                className="flex-1 bg-accent hover:bg-accent/90 text-accent-foreground"
                 disabled={uploading}
                 data-testid="button-save-avatar"
               >

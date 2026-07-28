@@ -212,8 +212,8 @@ async function sendOrThrow(client: Resend, payload: any) {
 }
 
 // ── Shared brand constants ────────────────────────────────────────────────────
-const BRAND_GREEN = '#8bc440';
-const BRAND_DARK = '#191919';
+const BRAND_GREEN = BRAND.theme.accentHex;
+const BRAND_DARK = BRAND.theme.darkHex;
 const SITE_DOMAIN = BRAND.domain;
 const BRAND_NAME = BRAND.name;
 // Logo file is committed at client/public/favicon.png.
@@ -863,9 +863,9 @@ export async function sendQuoteReceivedEmails({
     <h3 style="margin-bottom: 8px;">Your Configuration Summary</h3>
     ${comparisonSlotB ? `<p style="font-size:13px;color:#6b7280;margin-bottom:8px;">You submitted two options for our team to compare. Both are shown below.${chosenOption ? ` <strong>Option ${chosenOption}</strong> has been selected as your final choice.` : " If you already know which option you prefer, you can select it using the button below each option and we'll be notified straight away."}</p>` : ''}
     ${comparisonSlotB
-      ? `<p style="font-weight:bold;font-size:14px;margin-bottom:4px;color:#191919;">Option A${chosenOption === 'A' ? ' <span style="background:#8bc440;color:#191919;font-size:11px;padding:2px 8px;border-radius:4px;font-weight:bold;vertical-align:middle;">CHOSEN</span>' : ''}</p>`
+      ? `<p style="font-weight:bold;font-size:14px;margin-bottom:4px;color:${BRAND_DARK};">Option A${chosenOption === 'A' ? ' <span style="background:${BRAND_GREEN};color:${BRAND_DARK};font-size:11px;padding:2px 8px;border-radius:4px;font-weight:bold;vertical-align:middle;">CHOSEN</span>' : ''}</p>`
       : ''}
-    <table class="summary" style="${comparisonSlotB && chosenOption === 'A' ? 'border:2px solid #8bc440;border-radius:4px;' : ''}">
+    <table class="summary" style="${comparisonSlotB && chosenOption === 'A' ? 'border:2px solid ${BRAND_GREEN};border-radius:4px;' : ''}">
       ${vanTitle ? `<tr><td>Van</td><td>${vanTitle}</td></tr>` : ''}
       ${kitName ? `<tr><td>Pack</td><td>${kitName}</td></tr>` : ''}
       ${upgradeNames && upgradeNames.length > 0 ? `<tr><td>Upgrades</td><td><ul style="margin:2px 0;padding-left:18px;">${upgradeNames.map(u => `<li style="margin-bottom:2px;">${u}</li>`).join('')}</ul></td></tr>` : ''}
@@ -876,20 +876,20 @@ export async function sendQuoteReceivedEmails({
       ${discountFmt ? `<tr><td style="color:#166534;font-weight:bold;">Discount</td><td style="color:#166534;font-weight:bold;">-${discountFmt}</td></tr>` : ''}
       <tr class="total-row"><td>Total${discountAmountPence > 0 ? ' (after discount)' : ''}</td><td>${total}</td></tr>
       ${financeInfoA ? `
-      <tr><td colspan="2" style="padding-top:12px;padding-bottom:4px;font-weight:bold;font-size:13px;color:#191919;border-top:2px solid #e5e7eb;">Finance Illustration (HP — 10.9% APR)</td></tr>
+      <tr><td colspan="2" style="padding-top:12px;padding-bottom:4px;font-weight:bold;font-size:13px;color:${BRAND_DARK};border-top:2px solid #e5e7eb;">Finance Illustration (HP — 10.9% APR)</td></tr>
       <tr><td style="color:#6b7280;">Deposit</td><td>£${(financeInfoA.depositAmount / 100).toLocaleString('en-GB', { minimumFractionDigits: 2 })}</td></tr>
       <tr><td style="color:#6b7280;">Term</td><td>${financeInfoA.termMonths} months${financeInfoA.termMonths % 12 === 0 ? ` (${financeInfoA.termMonths / 12} yr${financeInfoA.termMonths / 12 !== 1 ? 's' : ''})` : ''}</td></tr>
-      <tr><td style="color:#6b7280;">Est. Monthly</td><td style="font-weight:bold;color:#8bc440;">£${(financeInfoA.monthlyPayment / 100).toLocaleString('en-GB', { minimumFractionDigits: 2 })}/month</td></tr>
+      <tr><td style="color:#6b7280;">Est. Monthly</td><td style="font-weight:bold;color:${BRAND_GREEN};">£${(financeInfoA.monthlyPayment / 100).toLocaleString('en-GB', { minimumFractionDigits: 2 })}/month</td></tr>
       <tr><td style="color:#6b7280;">Est. Weekly</td><td>£${(financeInfoA.weeklyPayment / 100).toLocaleString('en-GB', { minimumFractionDigits: 2 })}/week (approx.)</td></tr>
       ` : ''}
     </table>
     ${comparisonSlotB && !chosenOption && baseUrl && chooseOptionToken ? `
     <div style="text-align:center;margin:12px 0 24px;">
-      <a href="${baseUrl}/api/quotes/${quote.id}/choose-option?option=A&token=${chooseOptionToken}" style="display:block;max-width:260px;margin:0 auto;background:#8bc440;color:#191919;font-weight:bold;font-size:15px;padding:14px 28px;border-radius:4px;text-decoration:none;text-align:center;box-sizing:border-box;">I choose Option A</a>
+      <a href="${baseUrl}/api/quotes/${quote.id}/choose-option?option=A&token=${chooseOptionToken}" style="display:block;max-width:260px;margin:0 auto;background:${BRAND_GREEN};color:${BRAND_DARK};font-weight:bold;font-size:15px;padding:14px 28px;border-radius:4px;text-decoration:none;text-align:center;box-sizing:border-box;">I choose Option A</a>
     </div>` : ''}
     ${comparisonSlotB ? `
-    <p style="font-weight:bold;font-size:14px;margin-top:20px;margin-bottom:4px;color:#191919;">Option B${chosenOption === 'B' ? ' <span style="background:#8bc440;color:#191919;font-size:11px;padding:2px 8px;border-radius:4px;font-weight:bold;vertical-align:middle;">CHOSEN</span>' : ''}</p>
-    <table class="summary" style="${chosenOption === 'B' ? 'border:2px solid #8bc440;border-radius:4px;' : ''}">
+    <p style="font-weight:bold;font-size:14px;margin-top:20px;margin-bottom:4px;color:${BRAND_DARK};">Option B${chosenOption === 'B' ? ' <span style="background:${BRAND_GREEN};color:${BRAND_DARK};font-size:11px;padding:2px 8px;border-radius:4px;font-weight:bold;vertical-align:middle;">CHOSEN</span>' : ''}</p>
+    <table class="summary" style="${chosenOption === 'B' ? 'border:2px solid ${BRAND_GREEN};border-radius:4px;' : ''}">
       ${comparisonSlotB.vanTitle ? `<tr><td>Van</td><td>${comparisonSlotB.vanTitle}</td></tr>` : ''}
       ${comparisonSlotB.kitName ? `<tr><td>Pack</td><td>${comparisonSlotB.kitName}</td></tr>` : ''}
       ${comparisonSlotB.upgradeNames && comparisonSlotB.upgradeNames.length > 0 ? `<tr><td>Upgrades</td><td><ul style="margin:2px 0;padding-left:18px;">${comparisonSlotB.upgradeNames.map(u => `<li style="margin-bottom:2px;">${u}</li>`).join('')}</ul></td></tr>` : ''}
@@ -898,16 +898,16 @@ export async function sendQuoteReceivedEmails({
       ${comparisonSlotB.estVAT != null ? `<tr><td>VAT (20%)</td><td>£${(comparisonSlotB.estVAT / 100).toLocaleString('en-GB', { minimumFractionDigits: 2 })}</td></tr>` : ''}
       ${comparisonSlotB.estTotal != null ? `<tr class="total-row"><td>Total</td><td>£${(comparisonSlotB.estTotal / 100).toLocaleString('en-GB', { minimumFractionDigits: 2 })}</td></tr>` : ''}
       ${financeInfoB ? `
-      <tr><td colspan="2" style="padding-top:12px;padding-bottom:4px;font-weight:bold;font-size:13px;color:#191919;border-top:2px solid #e5e7eb;">Finance Illustration (HP — 10.9% APR)</td></tr>
+      <tr><td colspan="2" style="padding-top:12px;padding-bottom:4px;font-weight:bold;font-size:13px;color:${BRAND_DARK};border-top:2px solid #e5e7eb;">Finance Illustration (HP — 10.9% APR)</td></tr>
       <tr><td style="color:#6b7280;">Deposit</td><td>£${(financeInfoB.depositAmount / 100).toLocaleString('en-GB', { minimumFractionDigits: 2 })}</td></tr>
       <tr><td style="color:#6b7280;">Term</td><td>${financeInfoB.termMonths} months${financeInfoB.termMonths % 12 === 0 ? ` (${financeInfoB.termMonths / 12} yr${financeInfoB.termMonths / 12 !== 1 ? 's' : ''})` : ''}</td></tr>
-      <tr><td style="color:#6b7280;">Est. Monthly</td><td style="font-weight:bold;color:#8bc440;">£${(financeInfoB.monthlyPayment / 100).toLocaleString('en-GB', { minimumFractionDigits: 2 })}/month</td></tr>
+      <tr><td style="color:#6b7280;">Est. Monthly</td><td style="font-weight:bold;color:${BRAND_GREEN};">£${(financeInfoB.monthlyPayment / 100).toLocaleString('en-GB', { minimumFractionDigits: 2 })}/month</td></tr>
       <tr><td style="color:#6b7280;">Est. Weekly</td><td>£${(financeInfoB.weeklyPayment / 100).toLocaleString('en-GB', { minimumFractionDigits: 2 })}/week (approx.)</td></tr>
       ` : ''}
     </table>
     ${!chosenOption && baseUrl && chooseOptionToken ? `
     <div style="text-align:center;margin:12px 0 24px;">
-      <a href="${baseUrl}/api/quotes/${quote.id}/choose-option?option=B&token=${chooseOptionToken}" style="display:block;max-width:260px;margin:0 auto;background:#8bc440;color:#191919;font-weight:bold;font-size:15px;padding:14px 28px;border-radius:4px;text-decoration:none;text-align:center;box-sizing:border-box;">I choose Option B</a>
+      <a href="${baseUrl}/api/quotes/${quote.id}/choose-option?option=B&token=${chooseOptionToken}" style="display:block;max-width:260px;margin:0 auto;background:${BRAND_GREEN};color:${BRAND_DARK};font-weight:bold;font-size:15px;padding:14px 28px;border-radius:4px;text-decoration:none;text-align:center;box-sizing:border-box;">I choose Option B</a>
     </div>` : ''}
     ` : ''}
     <p>If you have any questions in the meantime, please call us on <strong>${PHONE}</strong> or reply to this email.</p>
@@ -2083,7 +2083,7 @@ export async function sendArtworkMessageToCustomer({
   const bodyHtml = `
     <p>Hi ${customerName},</p>
     <p>A member of our graphics team has sent you a message about your artwork proof.</p>
-    <div style="background:#f3f4f6; border-left:4px solid #8bc440; padding:16px; margin:20px 0; border-radius:4px;">
+    <div style="background:#f3f4f6; border-left:4px solid ${BRAND_GREEN}; padding:16px; margin:20px 0; border-radius:4px;">
       <p style="margin:0 0 6px; font-size:12px; color:#6b7280; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">${senderName} · ${BRAND_NAME}</p>
       <p style="margin:0; white-space:pre-wrap; color:#111827;">${message}</p>
     </div>

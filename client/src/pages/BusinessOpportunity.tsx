@@ -172,7 +172,7 @@ export default function BusinessOpportunity() {
               <Link href="/configurator/van">
                 <Button
                   size="lg"
-                  className="w-full sm:w-auto bg-[#8bc440e6] text-[#191919] border-green-600 font-semibold"
+                  className="w-full sm:w-auto bg-accent/90 text-accent-foreground border-green-600 font-semibold"
                   data-testid="button-configure-van-opportunity"
                 >
                   Configure Your Van
@@ -206,14 +206,14 @@ export default function BusinessOpportunity() {
                   className="text-center"
                   data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, "-")}`}
                 >
-                  <Icon className="w-6 h-6 mx-auto mb-3 text-[#191919]/70" />
-                  <div className="text-3xl sm:text-4xl font-extrabold text-[#191919] mb-1">
+                  <Icon className="w-6 h-6 mx-auto mb-3 text-accent-foreground/70" />
+                  <div className="text-3xl sm:text-4xl font-extrabold text-accent-foreground mb-1">
                     {stat.value}
                   </div>
-                  <div className="font-semibold text-[#191919] text-sm">
+                  <div className="font-semibold text-accent-foreground text-sm">
                     {stat.label}
                   </div>
-                  <div className="text-[#191919]/60 text-xs mt-0.5">
+                  <div className="text-accent-foreground/60 text-xs mt-0.5">
                     {stat.sub}
                   </div>
                 </div>
@@ -332,7 +332,7 @@ export default function BusinessOpportunity() {
                   <Link href="/configurator/van">
                     <Button
                       size="lg"
-                      className="w-full sm:w-auto bg-[#8bc440e6] text-[#191919] border-green-600 font-semibold"
+                      className="w-full sm:w-auto bg-accent/90 text-accent-foreground border-green-600 font-semibold"
                       data-testid="button-start-configurator"
                     >
                       Start Configuring
@@ -483,7 +483,7 @@ export default function BusinessOpportunity() {
               <Link href="/configurator/van">
                 <Button
                   size="lg"
-                  className="w-full sm:w-auto bg-[#8bc440e6] text-[#191919] border-green-600 font-semibold"
+                  className="w-full sm:w-auto bg-accent/90 text-accent-foreground border-green-600 font-semibold"
                   data-testid="button-final-cta"
                 >
                   Configure Your Van

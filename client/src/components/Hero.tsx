@@ -119,7 +119,7 @@ export default function Hero() {
                 <Button
                   size="lg"
                   variant="default"
-                  className="w-full sm:w-auto border-green-600 font-semibold bg-[#8bc440e6] text-[#191919]"
+                  className="w-full sm:w-auto border-accent font-semibold bg-accent/90 text-accent-foreground"
                   data-testid="button-configure-van"
                 >
                   Configure Your Van

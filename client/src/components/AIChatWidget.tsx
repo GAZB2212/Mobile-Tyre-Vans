@@ -69,7 +69,7 @@ function SummaryCard({
   return (
     <div className="bg-white/5 border border-white/10 rounded-xl p-4 space-y-4">
       <div className="flex items-center gap-2">
-        <Zap size={16} className="text-[#8bc440]" />
+        <Zap size={16} className="text-accent" />
         <span className="text-white font-semibold text-sm">Your configuration</span>
       </div>
 
@@ -96,7 +96,7 @@ function SummaryCard({
         )}
         <div className="flex justify-between">
           <span className="text-white/50">48V silent compressor</span>
-          <span className={config.includes48v ? "text-[#8bc440] font-medium" : "text-white/40"}>
+          <span className={config.includes48v ? "text-accent font-medium" : "text-white/40"}>
             {config.includes48v ? "Included" : "Not included"}
           </span>
         </div>
@@ -119,7 +119,7 @@ function SummaryCard({
       </div>
 
       {!config.includes48v && trackers.responseToThis48v !== "hard_no" && (
-        <div className="bg-[#8bc440]/10 border border-[#8bc440]/20 rounded-lg px-3 py-2 text-xs text-[#8bc440]">
+        <div className="bg-accent/10 border border-accent/20 rounded-lg px-3 py-2 text-xs text-accent">
           Most customers add the 48V silent compressor system — worth including for fuel savings alone.
         </div>
       )}
@@ -132,7 +132,7 @@ function SummaryCard({
               <div className="flex items-center gap-1.5 flex-1 min-w-0">
                 <span className="text-white/80 text-xs truncate">{u.name}</span>
                 <span
-                  className="text-[9px] font-medium px-1.5 py-px rounded bg-[#8bc440]/15 text-[#8bc440] border border-[#8bc440]/25 shrink-0"
+                  className="text-[9px] font-medium px-1.5 py-px rounded bg-accent/15 text-accent border border-accent/25 shrink-0"
                   data-testid={`badge-popular-widget-${u.id}`}
                 >
                   Popular choice
@@ -141,7 +141,7 @@ function SummaryCard({
               <button
                 onClick={() => onAddUpgrade(u.id)}
                 data-testid={`button-add-upgrade-${u.id}`}
-                className="flex items-center gap-1 text-xs text-[#8bc440] border border-[#8bc440]/30 px-2 py-0.5 rounded-md hover:bg-[#8bc440]/10 transition-colors shrink-0"
+                className="flex items-center gap-1 text-xs text-accent border border-accent/30 px-2 py-0.5 rounded-md hover:bg-accent/10 transition-colors shrink-0"
               >
                 <Plus size={10} /> Add
               </button>
@@ -154,7 +154,7 @@ function SummaryCard({
         <Button
           onClick={onViewConfig}
           data-testid="button-view-configuration"
-          className="w-full bg-[#8bc440] text-[#191919] font-semibold hover:bg-[#8bc440]/90"
+          className="w-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90"
         >
           View your configuration <ArrowRight size={16} className="ml-1" />
         </Button>
@@ -610,12 +610,12 @@ export default function AIChatWidget() {
           <button
             onClick={handleOpen}
             data-testid="button-ai-chat-open"
-            className="md:hidden fixed bottom-0 left-0 right-0 z-[10000] flex items-center gap-3 px-5 py-3.5 bg-[#8bc440] text-[#191919] shadow-[0_-4px_24px_rgba(0,0,0,0.3)] rounded-t-2xl active:bg-[#8bc440]/90 transition-colors"
+            className="md:hidden fixed bottom-0 left-0 right-0 z-[10000] flex items-center gap-3 px-5 py-3.5 bg-accent text-accent-foreground shadow-[0_-4px_24px_rgba(0,0,0,0.3)] rounded-t-2xl active:bg-accent/90 transition-colors"
           >
-            <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 ring-2 ring-[#191919]/15 relative">
+            <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 ring-2 ring-primary/15 relative">
               <img src={maxAvatarSrc} alt="Max" className="w-full h-full object-cover object-top" />
               {hasResume && (
-                <span className="absolute bottom-0.5 right-0.5 w-2.5 h-2.5 rounded-full bg-[#191919]/50 ring-1 ring-[#8bc440]" />
+                <span className="absolute bottom-0.5 right-0.5 w-2.5 h-2.5 rounded-full bg-primary/50 ring-1 ring-accent" />
               )}
             </div>
             <div className="flex flex-col items-start flex-1">
@@ -629,9 +629,9 @@ export default function AIChatWidget() {
           <button
             onClick={handleOpen}
             data-testid="button-ai-chat-open-desktop"
-            className="hidden md:flex fixed bottom-24 right-5 z-[10000] items-center gap-3 pl-3 pr-4 py-2.5 rounded-xl bg-[#8bc440] text-[#191919] shadow-lg hover:bg-[#8bc440]/90 transition-colors"
+            className="hidden md:flex fixed bottom-24 right-5 z-[10000] items-center gap-3 pl-3 pr-4 py-2.5 rounded-xl bg-accent text-accent-foreground shadow-lg hover:bg-accent/90 transition-colors"
           >
-            <div className="w-8 h-8 rounded-full overflow-hidden shrink-0 ring-2 ring-[#191919]/15">
+            <div className="w-8 h-8 rounded-full overflow-hidden shrink-0 ring-2 ring-primary/15">
               <img src={maxAvatarSrc} alt="Max" className="w-full h-full object-cover object-top" />
             </div>
             <div className="flex flex-col items-start">
@@ -639,7 +639,7 @@ export default function AIChatWidget() {
               <span className="text-sm font-bold leading-none flex items-center gap-1.5">
                 Build your van with {BRAND.assistantName}
                 {hasResume && (
-                  <span className="w-2 h-2 rounded-full bg-[#191919]/40" />
+                  <span className="w-2 h-2 rounded-full bg-primary/40" />
                 )}
               </span>
             </div>
@@ -662,7 +662,7 @@ export default function AIChatWidget() {
               {/* Header */}
               <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 shrink-0">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full overflow-hidden ring-2 ring-[#8bc440]/40 shrink-0">
+                  <div className="w-9 h-9 rounded-full overflow-hidden ring-2 ring-accent/40 shrink-0">
                     <img src={maxAvatarSrc} alt="Max" className="w-full h-full object-cover object-top" />
                   </div>
                   <div>
@@ -682,14 +682,14 @@ export default function AIChatWidget() {
                   data-testid="button-choice-max"
                   className="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl p-4 text-left hover:bg-white/10 transition-colors"
                 >
-                  <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-[#8bc440]/40 shrink-0">
+                  <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-accent/40 shrink-0">
                     <img src={maxAvatarSrc} alt="Max" className="w-full h-full object-cover object-top" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="text-white font-semibold text-sm leading-none mb-1">Build my van with {BRAND.assistantName}</div>
                     <div className="text-white/50 text-xs leading-relaxed">AI-guided configurator — Max walks you through everything step by step</div>
                   </div>
-                  <ArrowRight size={16} className="text-[#8bc440] shrink-0" />
+                  <ArrowRight size={16} className="text-accent shrink-0" />
                 </button>
 
                 <button
@@ -698,7 +698,7 @@ export default function AIChatWidget() {
                   className="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl p-4 text-left hover:bg-white/10 transition-colors"
                 >
                   <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                    <MessageCircle size={22} className="text-[#8bc440]" />
+                    <MessageCircle size={22} className="text-accent" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="text-white font-semibold text-sm leading-none mb-1">Send us a message</div>
@@ -723,7 +723,7 @@ export default function AIChatWidget() {
                   <button onClick={() => setView("choice")} data-testid="button-back-to-choice" className="text-white/40 hover:text-white/80 transition-colors p-1 -ml-1">
                     <ArrowRight size={16} className="rotate-180" />
                   </button>
-                  <div className="w-9 h-9 rounded-full overflow-hidden ring-2 ring-[#8bc440]/40 shrink-0">
+                  <div className="w-9 h-9 rounded-full overflow-hidden ring-2 ring-accent/40 shrink-0">
                     <img src={maxAvatarSrc} alt="Max" className="w-full h-full object-cover object-top" />
                   </div>
                   <div>
@@ -780,7 +780,7 @@ export default function AIChatWidget() {
                         className="w-full bg-[#242424] text-white text-sm rounded-xl px-3.5 py-2.5 outline-none border border-white/10 focus:border-white/25 placeholder:text-white/30 transition-colors"
                       />
                     </div>
-                    <Button onClick={() => handleContactStart(captureNameInput, capturePhoneInput)} disabled={!captureNameInput.trim() && !capturePhoneInput.trim()} data-testid="button-contact-capture-submit" className="w-full bg-[#8bc440] text-[#191919] font-semibold">
+                    <Button onClick={() => handleContactStart(captureNameInput, capturePhoneInput)} disabled={!captureNameInput.trim() && !capturePhoneInput.trim()} data-testid="button-contact-capture-submit" className="w-full bg-accent text-accent-foreground font-semibold">
                       Get started <ArrowRight size={15} className="ml-1" />
                     </Button>
                     <button onClick={() => handleContactStart("", "")} data-testid="button-contact-capture-skip" className="w-full text-white/30 text-xs text-center hover:text-white/60 transition-colors pt-1">
@@ -793,7 +793,7 @@ export default function AIChatWidget() {
                   <div className="bg-white/5 border border-white/10 rounded-xl p-4 space-y-3">
                     <p className="text-white text-sm">Welcome back — you have a saved configuration. Would you like to pick up where you left off?</p>
                     <div className="flex gap-2">
-                      <Button size="sm" onClick={handleResume} data-testid="button-resume-conversation" className="bg-[#8bc440] text-[#191919] font-semibold flex-1">
+                      <Button size="sm" onClick={handleResume} data-testid="button-resume-conversation" className="bg-accent text-accent-foreground font-semibold flex-1">
                         <RotateCcw size={14} className="mr-1" /> Resume
                       </Button>
                       <Button size="sm" variant="outline" onClick={handleFreshStart} data-testid="button-start-fresh" className="flex-1 border-white/20 text-white/70">
@@ -808,7 +808,7 @@ export default function AIChatWidget() {
                     <div
                       data-testid={`msg-${m.role}-${i}`}
                       className={`max-w-[85%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
-                        m.role === "user" ? "bg-[#8bc440] text-[#191919] font-medium rounded-br-sm" : "bg-white/10 text-white rounded-bl-sm"
+                        m.role === "user" ? "bg-accent text-accent-foreground font-medium rounded-br-sm" : "bg-white/10 text-white rounded-bl-sm"
                       }`}
                     >{m.content}</div>
                   </div>
@@ -823,7 +823,7 @@ export default function AIChatWidget() {
                       <p className="text-red-300 text-sm">{errorMsg}</p>
                       <div className="flex items-center gap-3">
                         {messages.length === 0 && (
-                          <button onClick={() => triggerGreeting()} className="text-[#8bc440] text-xs hover:underline">Try again →</button>
+                          <button onClick={() => triggerGreeting()} className="text-accent text-xs hover:underline">Try again →</button>
                         )}
                         <a href="/configurator/ai-review" className="text-white/40 text-xs hover:underline">Go to configurator directly</a>
                       </div>
@@ -836,9 +836,9 @@ export default function AIChatWidget() {
                 )}
 
                 {stage === "complete" && (
-                  <div className="bg-[#8bc440]/10 border border-[#8bc440]/20 rounded-xl px-3.5 py-3 flex items-center gap-2">
-                    <Check size={14} className="text-[#8bc440]" />
-                    <p className="text-[#8bc440] text-sm">Taking you to your review page...</p>
+                  <div className="bg-accent/10 border border-accent/20 rounded-xl px-3.5 py-3 flex items-center gap-2">
+                    <Check size={14} className="text-accent" />
+                    <p className="text-accent text-sm">Taking you to your review page...</p>
                   </div>
                 )}
 
@@ -857,7 +857,7 @@ export default function AIChatWidget() {
                     disabled={loading}
                     className="flex-1 bg-[#242424] text-white text-sm rounded-xl px-3.5 py-2.5 outline-none border border-white/10 focus:border-white/25 placeholder:text-white/30 transition-colors disabled:opacity-50"
                   />
-                  <button onClick={handleSend} disabled={!input.trim() || loading} data-testid="button-ai-chat-send" className="w-9 h-9 rounded-xl bg-[#8bc440] flex items-center justify-center text-[#191919] disabled:opacity-40 hover:bg-[#8bc440]/90 transition-colors shrink-0">
+                  <button onClick={handleSend} disabled={!input.trim() || loading} data-testid="button-ai-chat-send" className="w-9 h-9 rounded-xl bg-accent flex items-center justify-center text-accent-foreground disabled:opacity-40 hover:bg-accent/90 transition-colors shrink-0">
                     <Send size={15} />
                   </button>
                 </div>
@@ -883,7 +883,7 @@ export default function AIChatWidget() {
                     <ArrowRight size={16} className="rotate-180" />
                   </button>
                   <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                    <MessageCircle size={18} className="text-[#8bc440]" />
+                    <MessageCircle size={18} className="text-accent" />
                   </div>
                   <div>
                     <div className="text-white font-semibold text-sm leading-none">Send a message</div>
@@ -898,8 +898,8 @@ export default function AIChatWidget() {
               <div className="flex-1 overflow-y-auto px-5 py-5">
                 {ctSubmitted ? (
                   <div className="flex flex-col items-center text-center gap-4 pt-8">
-                    <div className="w-14 h-14 rounded-full bg-[#8bc440]/15 flex items-center justify-center">
-                      <CheckCircle size={28} className="text-[#8bc440]" />
+                    <div className="w-14 h-14 rounded-full bg-accent/15 flex items-center justify-center">
+                      <CheckCircle size={28} className="text-accent" />
                     </div>
                     <div>
                       <p className="text-white font-semibold mb-1">Message received</p>
@@ -969,7 +969,7 @@ export default function AIChatWidget() {
                       }}
                       disabled={contactMutation.isPending}
                       data-testid="button-contact-send"
-                      className="w-full bg-[#8bc440] text-[#191919] font-semibold"
+                      className="w-full bg-accent text-accent-foreground font-semibold"
                     >
                       <Send size={14} className="mr-2" />
                       {contactMutation.isPending ? "Sending..." : "Send Message"}

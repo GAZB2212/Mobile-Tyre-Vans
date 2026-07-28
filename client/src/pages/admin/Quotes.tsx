@@ -1057,7 +1057,7 @@ export default function AdminQuotes() {
                                   <UserIcon className="w-3 h-3 mt-0.5 shrink-0 text-muted-foreground" />
                                   <p className="font-semibold text-sm truncate flex-1 min-w-0">{quote.userName}</p>
                                   {(quote as any).aiSessionId && (
-                                    <Badge className="shrink-0 bg-[#8bc440]/15 text-[#5a8a1a] dark:text-[#8bc440] border border-[#8bc440]/30 gap-1 text-[10px] px-1.5 py-0" data-testid={`badge-max-ai-kanban-${quote.id}`}>
+                                    <Badge className="shrink-0 bg-accent/15 text-[#5a8a1a] dark:text-accent border border-accent/30 gap-1 text-[10px] px-1.5 py-0" data-testid={`badge-max-ai-kanban-${quote.id}`}>
                                       <Bot className="w-2.5 h-2.5" />
                                       Max
                                     </Badge>
@@ -1150,7 +1150,7 @@ export default function AdminQuotes() {
                                             setCallDialog({ quoteId: quote.id, customerName: quote.name || "Customer", toNumber: normaliseToE164(quote.phone) });
                                           }}
                                           disabled={!quote.phone}
-                                          className="hidden md:flex p-1 rounded text-[#8bc440] hover:bg-muted transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                                          className="hidden md:flex p-1 rounded text-accent hover:bg-muted transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                                           data-testid={`icon-call-kanban-${quote.id}`}
                                         >
                                           <PhoneCall className="w-3 h-3" />
@@ -1210,7 +1210,7 @@ export default function AdminQuotes() {
                           <Badge variant="secondary" className="shrink-0" data-testid={`text-company-${quote.id}`}>{quote.company}</Badge>
                         )}
                         {(quote as any).aiSessionId && (
-                          <Badge className="shrink-0 bg-[#8bc440]/15 text-[#5a8a1a] dark:text-[#8bc440] border border-[#8bc440]/30 gap-1" data-testid={`badge-max-ai-${quote.id}`}>
+                          <Badge className="shrink-0 bg-accent/15 text-[#5a8a1a] dark:text-accent border border-accent/30 gap-1" data-testid={`badge-max-ai-${quote.id}`}>
                             <Bot className="w-3 h-3" />
                             Via Max
                           </Badge>
@@ -1366,7 +1366,7 @@ export default function AdminQuotes() {
                                   setCallDialog({ quoteId: quote.id, customerName: quote.name || "Customer", toNumber: normaliseToE164(quote.phone) });
                                 }}
                                 disabled={!quote.phone}
-                                className="hidden md:flex p-1.5 rounded hover:bg-muted text-[#8bc440] hover:text-[#8bc440]/80 transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none"
+                                className="hidden md:flex p-1.5 rounded hover:bg-muted text-accent hover:text-accent/80 transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none"
                                 data-testid={`icon-call-${quote.id}`}
                               >
                                 <PhoneCall className="w-3.5 h-3.5" />
@@ -1787,7 +1787,7 @@ export default function AdminQuotes() {
         <DialogContent className="sm:max-w-sm">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <PhoneCall className="w-4 h-4 text-[#8bc440]" />
+              <PhoneCall className="w-4 h-4 text-accent" />
               Call {callDialog?.customerName}
             </DialogTitle>
           </DialogHeader>
@@ -1827,7 +1827,7 @@ export default function AdminQuotes() {
             <Button variant="outline" size="sm" onClick={() => setCallDialog(null)}>Cancel</Button>
             <Button
               size="sm"
-              className="bg-[#8bc440] text-[#191919]"
+              className="bg-accent text-accent-foreground"
               disabled={!selectedStaffPhoneId || !callDialog?.toNumber || initiateCallMutation.isPending}
               onClick={() => {
                 if (!callDialog) return;

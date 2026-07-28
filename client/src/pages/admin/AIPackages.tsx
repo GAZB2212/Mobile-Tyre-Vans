@@ -252,7 +252,7 @@ export default function AdminAIPackages() {
                           <ul className="space-y-1">
                             {includedUpgrades.map(u => (
                               <li key={u.id} className="flex items-center gap-2 text-sm">
-                                <Check className="w-3.5 h-3.5 text-[#8bc440] flex-shrink-0" />
+                                <Check className="w-3.5 h-3.5 text-accent flex-shrink-0" />
                                 <span>{u.variantName ? `${upgrades?.find(p => p.id === u.parentId)?.name ?? u.name} — ${u.variantName}` : u.name}</span>
                               </li>
                             ))}
@@ -392,7 +392,7 @@ export default function AdminAIPackages() {
                 onClick={handleSave}
                 disabled={updateMutation.isPending}
                 data-testid="button-save-package"
-                className="bg-[#8bc440e6] text-[#191919] hover:bg-[#8bc440]"
+                className="bg-accent/90 text-accent-foreground hover:bg-accent"
               >
                 {updateMutation.isPending ? "Saving…" : "Save Package"}
               </Button>

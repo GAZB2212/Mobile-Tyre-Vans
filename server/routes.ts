@@ -3909,8 +3909,8 @@ Always refer the user to the exact admin menu path when describing a feature. Ke
 
   // Shared HTML renderer for customer-facing choose-option pages
   function chooseOptionHtmlPage(title: string, heading: string, body: string, isError = false) {
-    const brandGreen = '#8bc440';
-    const brandDark = '#191919';
+    const brandGreen = BRAND.theme.accentHex;
+    const brandDark = BRAND.theme.darkHex;
     return `<!DOCTYPE html>
 <html>
 <head>
@@ -3998,7 +3998,7 @@ Always refer the user to the exact admin menu path when describing a feature. Ke
 
       // Render a confirmation page with a POST form — no state is changed on GET.
       // This ensures mail scanners, prefetch, and accidental link clicks cannot trigger the choice.
-      const brandGreen = '#8bc440';
+      const brandGreen = BRAND.theme.accentHex;
       res.send(chooseOptionHtmlPage(
         `Confirm Option ${option}`,
         `Confirm your choice`,
@@ -4140,7 +4140,7 @@ Always refer the user to the exact admin menu path when describing a feature. Ke
         `<p class="badge">Option ${option} Selected</p>
         <p>We've recorded your choice and our team has been notified. We'll be in touch shortly to discuss the next steps.</p>
         <p>Your reference is <strong>#${ref}</strong>.</p>
-        <p>If you have any questions in the meantime, please call us on <span class="phone">${BRAND.phone}</span> or email <a href="mailto:${BRAND.infoEmail}" style="color:#8bc440">${BRAND.infoEmail}</a>.</p>`,
+        <p>If you have any questions in the meantime, please call us on <span class="phone">${BRAND.phone}</span> or email <a href="mailto:${BRAND.infoEmail}" style="color:${BRAND.theme.accentHex}">${BRAND.infoEmail}</a>.</p>`,
       ));
     } catch (error) {
       console.error('Error processing customer option choice:', error);
@@ -9980,15 +9980,15 @@ Only use IDs that appear in the lists above. Never invent IDs. Update config pro
         const statusLabel: Record<string, string> = { pending: "In Review", approved: "Approved", declined: "Declined", more_info_needed: "More Info Needed" };
         const subject = `Finance Update — ${quote.user_name}: ${statusEmoji[financeStatus]} ${statusLabel[financeStatus]}`;
         const notesHtml = financeNotes
-          ? `<div style="margin-top:16px;background:#f9fafb;border-left:4px solid #8bc440;padding:12px 16px;border-radius:0 4px 4px 0;">
+          ? `<div style="margin-top:16px;background:#f9fafb;border-left:4px solid ${BRAND.theme.accentHex};padding:12px 16px;border-radius:0 4px 4px 0;">
                <p style="margin:0 0 6px;font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;">Notes from finance partner</p>
                <p style="margin:0;white-space:pre-wrap;color:#111827;">${financeNotes}</p>
              </div>`
           : "";
         const html = `
           <div style="font-family:Arial,sans-serif;max-width:580px;margin:0 auto;background:#fff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;">
-            <div style="background:#191919;padding:16px 24px;">
-              <h1 style="margin:0;font-size:17px;color:#8bc440;">Finance Partner Portal</h1>
+            <div style="background:${BRAND.theme.darkHex};padding:16px 24px;">
+              <h1 style="margin:0;font-size:17px;color:${BRAND.theme.accentHex};">Finance Partner Portal</h1>
               <p style="margin:3px 0 0;font-size:12px;color:rgba(255,255,255,.5);">${BRAND.name}</p>
             </div>
             <div style="padding:24px;">

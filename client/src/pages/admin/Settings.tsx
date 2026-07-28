@@ -293,7 +293,7 @@ export default function AdminSettings() {
                 {twilioStatus && (
                   twilioConfigured ? (
                     <Badge
-                      className="bg-[#8bc440]/15 text-[#8bc440] border-[#8bc440]/30 no-default-active-elevate"
+                      className="bg-accent/15 text-accent border-accent/30 no-default-active-elevate"
                       variant="outline"
                       data-testid="badge-twilio-status"
                     >
@@ -368,14 +368,14 @@ export default function AdminSettings() {
                 return (
                   <div
                     key={p.key}
-                    className={`flex items-center justify-between gap-3 rounded-md border p-3 ${isActive ? "border-[#8bc440]/60 bg-[#8bc440]/5" : ""}`}
+                    className={`flex items-center justify-between gap-3 rounded-md border p-3 ${isActive ? "border-accent/60 bg-accent/5" : ""}`}
                     data-testid={`accounting-provider-${p.key}`}
                   >
                     <div className="min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="font-medium text-sm">{p.label}</span>
                         {isActive && (
-                          <Badge className="bg-[#8bc440]/15 text-[#8bc440] border-[#8bc440]/30 no-default-active-elevate" variant="outline">
+                          <Badge className="bg-accent/15 text-accent border-accent/30 no-default-active-elevate" variant="outline">
                             Active
                           </Badge>
                         )}

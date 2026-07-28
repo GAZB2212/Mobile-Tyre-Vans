@@ -55,7 +55,7 @@ export default function ConfiguratorIdleModal() {
         data-testid="modal-configurator-idle"
       >
         {/* Header strip */}
-        <div className="bg-[#8bc440] px-6 pt-8 pb-6">
+        <div className="bg-accent px-6 pt-8 pb-6">
           <div className="flex justify-center mb-4">
             <img
               src={maxAvatarSrc}
@@ -80,7 +80,7 @@ export default function ConfiguratorIdleModal() {
 
           <Button
             onClick={handleOpenAI}
-            className="w-full bg-[#8bc440e6] text-[#191919] hover:bg-[#8bc440] gap-2"
+            className="w-full bg-accent/90 text-accent-foreground hover:bg-accent gap-2"
             data-testid="button-idle-open-ai"
           >
             Chat with {BRAND.assistantName}
