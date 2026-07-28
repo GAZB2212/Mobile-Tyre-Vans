@@ -1,3 +1,4 @@
+import { BRAND } from "@shared/brand";
 import OpenAI from "openai";
 import { storage } from "./storage";
 
@@ -74,11 +75,11 @@ export async function generateAiBlogPost(
     ...(openaiBaseUrl ? { baseURL: openaiBaseUrl } : {}),
   });
 
-  const systemPrompt = `You are an expert SEO content writer for Mobile Tyre Vans, a UK company based in the UK (AA1 1AA) that builds and sells professionally converted mobile tyre fitting vans. The business offers custom van conversions, van finance (FCA authorised), tyre supplier connections, and REACT motorway training.
+  const systemPrompt = `You are an expert SEO content writer for ${BRAND.name}, a UK company that builds and sells ${BRAND.vertical.vehicleTermPlural}. ${BRAND.vertical.aiContext} The business offers custom conversions and vehicle finance (FCA authorised).
 
 Write high-quality, SEO-optimised blog posts that:
 - Are genuinely helpful and informative for people considering starting a mobile tyre fitting business
-- Naturally position Mobile Tyre Vans as the go-to solution
+- Naturally position ${BRAND.name} as the go-to solution
 - Include the target keyword naturally in the title, introduction, and throughout the body
 - Are written in British English
 - Are between 900 and 1,200 words

@@ -1,3 +1,4 @@
+import { BRAND } from "@shared/brand";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useLocation } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -238,7 +239,7 @@ export default function AIChatWidget() {
         }),
         signal: controller.signal,
       });
-      if (!res.ok) throw new Error("Max is temporarily busy. Tap the chat bubble to try again.");
+      if (!res.ok) throw new Error(`${BRAND.assistantName} is temporarily busy. Tap the chat bubble to try again.`);
       const data = await res.json();
       const assistantMsg: AIMessage = { role: "assistant", content: data.message ?? "" };
       // Only add Max's response — the __GREET__ trigger is never shown in the UI
@@ -248,8 +249,8 @@ export default function AIChatWidget() {
       if (data.stage) setStage(data.stage);
     } catch (err: any) {
       const msg = err?.name === "AbortError"
-        ? "Max took too long to respond. Please try again."
-        : (err?.message ?? "Max is temporarily unavailable. Please try again in a moment.");
+        ? `${BRAND.assistantName} took too long to respond. Please try again.`
+        : (err?.message ?? `${BRAND.assistantName} is temporarily unavailable. Please try again in a moment.`);
       setErrorMsg(msg);
     } finally {
       clearTimeout(timeout);
@@ -399,7 +400,7 @@ export default function AIChatWidget() {
       }
     } catch (err: any) {
       const msg = err?.name === "AbortError"
-        ? "Max took too long to respond. Please try again."
+        ? `${BRAND.assistantName} took too long to respond. Please try again.`
         : (err?.message ?? "Max is temporarily unavailable. You can still use the configurator directly.");
       setErrorMsg(msg);
     } finally {
@@ -619,7 +620,7 @@ export default function AIChatWidget() {
             </div>
             <div className="flex flex-col items-start flex-1">
               <span className="text-[10px] font-medium opacity-60 leading-none mb-0.5">Not sure where to start?</span>
-              <span className="text-sm font-bold leading-none">Build your van with Max</span>
+              <span className="text-sm font-bold leading-none">Build your van with {BRAND.assistantName}</span>
             </div>
             <ArrowRight className="w-5 h-5 opacity-60 shrink-0" />
           </button>
@@ -636,7 +637,7 @@ export default function AIChatWidget() {
             <div className="flex flex-col items-start">
               <span className="text-[10px] font-medium opacity-60 leading-none mb-0.5">Not sure where to start?</span>
               <span className="text-sm font-bold leading-none flex items-center gap-1.5">
-                Build your van with Max
+                Build your van with {BRAND.assistantName}
                 {hasResume && (
                   <span className="w-2 h-2 rounded-full bg-[#191919]/40" />
                 )}
@@ -685,7 +686,7 @@ export default function AIChatWidget() {
                     <img src={maxAvatarSrc} alt="Max" className="w-full h-full object-cover object-top" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-white font-semibold text-sm leading-none mb-1">Build my van with Max</div>
+                    <div className="text-white font-semibold text-sm leading-none mb-1">Build my van with {BRAND.assistantName}</div>
                     <div className="text-white/50 text-xs leading-relaxed">AI-guided configurator — Max walks you through everything step by step</div>
                   </div>
                   <ArrowRight size={16} className="text-[#8bc440] shrink-0" />

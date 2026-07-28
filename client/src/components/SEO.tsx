@@ -1,7 +1,8 @@
 import { useEffect } from "react";
+import { BRAND, siteUrl } from "@shared/brand";
 
-const SITE_URL = "https://www.mobiletyrevans.co.uk";
-const SITE_NAME = "Mobile Tyre Vans";
+const SITE_URL = siteUrl();
+const SITE_NAME = BRAND.name;
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 
 interface SEOProps {
@@ -45,7 +46,7 @@ export default function SEO({
       { property: 'og:site_name', content: SITE_NAME },
       { property: 'og:locale', content: 'en_GB' },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:site', content: '@mobiletyrevans' },
+      { name: 'twitter:site', content: BRAND.twitterHandle },
       { name: 'twitter:title', content: fullTitle },
       { name: 'twitter:description', content: description },
       { name: 'twitter:image', content: ogImage },
@@ -124,7 +125,7 @@ export const organizationStructuredData = {
   "@type": "AutomotiveBusiness",
   "name": SITE_NAME,
   "alternateName": "MTV",
-  "description": "UK's leading mobile tyre van conversion specialists. Custom-built mobile tyre vans, fully equipped with professional tyre fitting equipment. Nationwide delivery. Finance available. Call 0800 000 0000.",
+  "description": `UK's leading mobile tyre van conversion specialists. Custom-built mobile tyre vans, fully equipped with professional tyre fitting equipment. Nationwide delivery. Finance available. Call ${BRAND.phone}.`,
   "url": SITE_URL,
   "logo": `${SITE_URL}/favicon.png`,
   "image": `${SITE_URL}/og-image.jpg`,
@@ -159,7 +160,7 @@ export const organizationStructuredData = {
   },
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "Mobile Tyre Van Conversions",
+    "name": `${SITE_NAME} Conversions`,
     "itemListElement": [
       {
         "@type": "Offer",
@@ -188,8 +189,8 @@ export const organizationStructuredData = {
     ]
   },
   "sameAs": [
-    "https://www.facebook.com/mobiletyrevans",
-    "https://www.instagram.com/mobiletyrevans",
+    
+    
     "https://www.linkedin.com/company/mobile-tyre-van-city"
   ],
   "foundingDate": "2020",
@@ -202,8 +203,8 @@ export const organizationStructuredData = {
 export const aboutPageStructuredData = {
   "@context": "https://schema.org",
   "@type": "AboutPage",
-  "name": "About Mobile Tyre Vans",
-  "description": "Mobile Tyre Vans is the UK's leading specialist in custom mobile tyre van conversions, based in the UK. Founded to empower entrepreneurs to start professional mobile tyre fitting businesses.",
+  "name": `About ${SITE_NAME}`,
+  "description": `${SITE_NAME} is the UK's leading specialist in custom mobile tyre van conversions, based in the UK. Founded to empower entrepreneurs to start professional mobile tyre fitting businesses.`,
   "url": `${SITE_URL}/about`,
   "mainEntity": {
     "@context": "https://schema.org",
@@ -214,7 +215,7 @@ export const aboutPageStructuredData = {
     "url": SITE_URL,
     "logo": `${SITE_URL}/favicon.png`,
     "telephone": "+44-151-203-8500",
-    "email": "sales@mobiletyrevans.co.uk",
+    "email": BRAND.salesEmail,
     "foundingDate": "2020",
     "foundingLocation": {
       "@type": "Place",
@@ -241,8 +242,8 @@ export const aboutPageStructuredData = {
       "Mobile business setup"
     ],
     "sameAs": [
-      "https://www.facebook.com/mobiletyrevans",
-      "https://www.instagram.com/mobiletyrevans",
+      
+      
       "https://www.linkedin.com/company/mobile-tyre-van-city"
     ]
   }
@@ -251,8 +252,8 @@ export const aboutPageStructuredData = {
 export const contactPageStructuredData = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
-  "name": "Contact Mobile Tyre Vans",
-  "description": "Get in touch with Mobile Tyre Vans. Call 0800 000 0000 or visit our workshop at Unit 1, Example Business Park, Your Town, AA1 1AA.",
+  "name": `Contact ${SITE_NAME}`,
+  "description": `Get in touch with ${SITE_NAME}. Call ${BRAND.phone} or visit our workshop at Unit 1, Example Business Park, Your Town, AA1 1AA.`,
   "url": `${SITE_URL}/contact`,
   "mainEntity": {
     "@context": "https://schema.org",
@@ -264,7 +265,7 @@ export const contactPageStructuredData = {
     "logo": `${SITE_URL}/favicon.png`,
     "image": `${SITE_URL}/og-image.jpg`,
     "telephone": "+44-151-203-8500",
-    "email": "sales@mobiletyrevans.co.uk",
+    "email": BRAND.salesEmail,
     "priceRange": "££",
     "openingHoursSpecification": [
       {
@@ -290,7 +291,7 @@ export const contactPageStructuredData = {
       "@type": "ContactPoint",
       "telephone": "+44-151-203-8500",
       "contactType": "Sales",
-      "email": "sales@mobiletyrevans.co.uk",
+      "email": BRAND.salesEmail,
       "areaServed": "GB",
       "availableLanguage": "English",
       "hoursAvailable": {
@@ -352,7 +353,7 @@ export const homeFaqStructuredData = {
       "name": "Where are you based?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We are based at Unit 1, Example Business Park, Your Town, AA1 1AA. You can call us on 0800 000 0000 or use our online configurator to start your build from anywhere in the UK."
+        "text": `We are based at Unit 1, Example Business Park, Your Town, AA1 1AA. You can call us on ${BRAND.phone} or use our online configurator to start your build from anywhere in the UK.`
       }
     }
   ]

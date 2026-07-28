@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient, clearAuthToken } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import logoImage from "@assets/mtv-logo.svg";
+import { BRAND } from "@shared/brand";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,7 +46,8 @@ export default function Header() {
     { name: "Finance", href: "/finance" },
     { name: "Gallery", href: "/gallery" },
     { name: "Opportunity", href: "/business-opportunity" },
-    { name: "Training", href: "/training" },
+    // Training is a vertical-specific offering (tyre industry courses)
+    ...(BRAND.vertical.features.training ? [{ name: "Training", href: "/training" }] : []),
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ];
@@ -81,9 +83,9 @@ export default function Header() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-10 text-xs">
             <div className="flex items-center gap-6 text-muted-foreground">
-              <a href="tel:08000000000" className="flex items-center gap-2 hover:text-foreground transition-colors" data-testid="link-phone-header">
+              <a href={`tel:${BRAND.phoneHref}`} className="flex items-center gap-2 hover:text-foreground transition-colors" data-testid="link-phone-header">
                 <Phone className="w-3 h-3" />
-                <span>0800 000 0000</span>
+                <span>{BRAND.phone}</span>
               </a>
               <div className="hidden md:flex items-center gap-2">
                 <Clock className="w-3 h-3" />
@@ -109,7 +111,7 @@ export default function Header() {
           <Link href="/" className="flex items-center flex-shrink-0" data-testid="link-home">
             <img
               src={logoImage}
-              alt="Mobile Tyre Vans"
+              alt={BRAND.name}
               className="h-20 sm:h-24 md:h-16 lg:h-24 xl:h-32 w-auto"
             />
           </Link>

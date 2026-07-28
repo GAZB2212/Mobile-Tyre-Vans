@@ -1,4 +1,5 @@
 import { Switch, Route, useLocation, Redirect } from "wouter";
+import { BRAND } from "@shared/brand";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ConfiguratorProvider } from "@/lib/ConfiguratorContext";
@@ -99,7 +100,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       <Route path="/how-it-works" component={HowItWorks} />
-      <Route path="/training" component={Training} />
+      {BRAND.vertical.features.training && <Route path="/training" component={Training} />}
       <Route path="/business-opportunity" component={BusinessOpportunity} />
       <Route path="/configurator">
         <Redirect to="/configurator/van" />

@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, MapPin, Truck, ShieldCheck, Calculator } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BRAND } from "@shared/brand";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import UKManufacturing from "@/components/UKManufacturing";
@@ -115,8 +116,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <SEO
-        title="Mobile Tyre Van Conversions UK | Mobile Tyre Vans"
-        description="UK specialists in custom mobile tyre van conversions. Fully equipped builds, nationwide delivery, finance available. Based in the UK. Call 0800 000 0000."
+        title={`${BRAND.vertical.seoTitle} | ${BRAND.name}`}
+        description={`${BRAND.vertical.seoDescription} Call ${BRAND.phone}.`}
         canonical="/"
         keywords="mobile tyre van, tyre van conversion, mobile tyre fitting van, mobile tyre van for sale, mobile tyre business, van conversion UK"
         structuredData={[orgSchema, homeFaqStructuredData]}

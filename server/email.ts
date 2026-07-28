@@ -1,4 +1,5 @@
 import { Resend } from 'resend';
+import { BRAND, siteUrl as brandSiteUrl } from "@shared/brand";
 import { storage } from './storage';
 
 // ── Internal notification routing ────────────────────────────────────────────
@@ -110,7 +111,7 @@ export function isTestEmail(email: string | null | undefined): boolean {
 let connectionSettings: any;
 let fromEmailLogged = false;
 
-const DEFAULT_FROM_EMAIL = 'Mobile Tyre Vans <noreply@mobiletyrevans.co.uk>';
+const DEFAULT_FROM_EMAIL = `${BRAND.name} <noreply@${BRAND.domain.replace(/^www\./, "")}>`;
 
 async function getCredentials() {
   const fromEmail = process.env.MAIL_FROM || DEFAULT_FROM_EMAIL;
@@ -213,7 +214,8 @@ async function sendOrThrow(client: Resend, payload: any) {
 // ── Shared brand constants ────────────────────────────────────────────────────
 const BRAND_GREEN = '#8bc440';
 const BRAND_DARK = '#191919';
-const SITE_DOMAIN = 'www.mobiletyrevans.co.uk';
+const SITE_DOMAIN = BRAND.domain;
+const BRAND_NAME = BRAND.name;
 // Logo file is committed at client/public/favicon.png.
 // Vite serves client/public/ at the site root so the file is accessible at /favicon.png.
 // Priority: SITE_URL env var → first domain in REPLIT_DOMAINS (works in both dev and production
@@ -228,8 +230,8 @@ function resolveLogoUrl(): string {
   return `https://${SITE_DOMAIN}/favicon.png`;
 }
 const LOGO_URL = resolveLogoUrl();
-const ADDRESS = 'Unit 1, Example Business Park, Your Town, AA1 1AA';
-const PHONE = '0800 000 0000';
+const ADDRESS = BRAND.addressLines.join(', ');
+const PHONE = BRAND.phone;
 
 // ── Shared email layout ───────────────────────────────────────────────────────
 export function emailLayout(
@@ -265,13 +267,13 @@ export function emailLayout(
 <body>
   <div class="em-container">
     <div class="em-header">
-      <img src="${LOGO_URL}" alt="Mobile Tyre Vans" />
+      <img src="${LOGO_URL}" alt="${BRAND_NAME}" />
     </div>
     <div class="em-content">
       ${bodyHtml}
     </div>
     <div class="em-footer">
-      <p style="margin:0 0 3px;"><strong>Mobile Tyre Vans</strong></p>
+      <p style="margin:0 0 3px;"><strong>${BRAND_NAME}</strong></p>
       <p style="margin:0 0 3px;">${ADDRESS}</p>
       <p style="margin:0;">${PHONE} &bull; <a href="https://${SITE_DOMAIN}">${SITE_DOMAIN}</a></p>
       ${footerNote ? `<p style="margin:12px 0 0; font-size:12px; color:#9ca3af;">${footerNote}</p>` : ''}
@@ -325,7 +327,7 @@ export async function sendQuoteConfirmationEmail({
     </div>
     <p style="font-size: 14px; color: #6b7280; margin-top: 30px;">This confirmation link is for one-time use and will expire after confirmation.</p>
     <p>If you have any questions, please call us on <strong>${PHONE}</strong>.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
 
   await sendOrThrow(client, {
@@ -342,7 +344,7 @@ export async function sendQuoteConfirmationEmail({
       `,
       footerNote: "If you didn't request this quote, please disregard this email.",
     }),
-    text: `Hi ${customerName},\n\nYour Van Conversion Quote #${quoteId.slice(0, 8).toUpperCase()} is Ready!\n\nTotal Price: ${formattedTotal} (Including VAT)\n${savings ? `Special Discount Applied - You Save ${savings}!\n` : ''}\n${customerNotes ? `Note from our team:\n${customerNotes}\n\n` : ''}To confirm your quote visit:\n${confirmationUrl}\n\nCall us: ${PHONE}\n\nMobile Tyre Vans\n${ADDRESS}`,
+    text: `Hi ${customerName},\n\nYour Van Conversion Quote #${quoteId.slice(0, 8).toUpperCase()} is Ready!\n\nTotal Price: ${formattedTotal} (Including VAT)\n${savings ? `Special Discount Applied - You Save ${savings}!\n` : ''}\n${customerNotes ? `Note from our team:\n${customerNotes}\n\n` : ''}To confirm your quote visit:\n${confirmationUrl}\n\nCall us: ${PHONE}\n\n${BRAND_NAME}\n${ADDRESS}`,
   });
 }
 
@@ -512,16 +514,16 @@ export async function sendQuoteSpecSummaryEmail({
       ${optionBlock('B', slotB.vanTitle, slotB.kitName, slotB.upgradeNames, slotB.estSubtotal ?? 0, slotB.estVAT ?? 0, slotB.estTotal ?? 0, slotB.financeInfo ?? null)}
       ${customerNote ? `<div class="note-box"><strong>Note from our team:</strong><br>${customerNote}</div>` : ''}
       <p>If you have any questions, please call us on <strong>${PHONE}</strong> or reply to this email.</p>
-      <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+      <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
     `;
 
     const tokenSuffix = chooseOptionToken ? `&token=${chooseOptionToken}` : '';
-    const textBody = `Hi ${customerName},\n\n${chosenOption ? `You have selected Option ${chosenOption}.` : 'We have prepared two options for you to compare. Please choose the one you prefer using the links below.'}\n\nReference: #${ref}\n\nOPTION A\n${vanTitle ? `Van: ${vanTitle}\n` : ''}${kitName ? `Pack: ${kitName}\n` : ''}${upgradeNames && upgradeNames.length > 0 ? `Upgrades:\n${upgradeNames.map(u => `  - ${u}`).join('\n')}\n` : ''}${extrasTextBlock}Subtotal: ${fmt(subtotal)}\nVAT: ${fmt(vat)}\nTotal: ${fmt(totalAfterDiscount)}\n${!chosenOption && chooseOptionToken ? `\nChoose Option A: ${siteBase}/api/quotes/${quoteId}/choose-option?option=A${tokenSuffix}\n` : ''}\nOPTION B\n${slotB.vanTitle ? `Van: ${slotB.vanTitle}\n` : ''}${slotB.kitName ? `Pack: ${slotB.kitName}\n` : ''}${slotB.upgradeNames && slotB.upgradeNames.length > 0 ? `Upgrades:\n${slotB.upgradeNames.map(u => `  - ${u}`).join('\n')}\n` : ''}${extrasTextBlock}${slotB.estSubtotal != null ? `Subtotal: ${fmt(slotB.estSubtotal)}\n` : ''}${slotB.estVAT != null ? `VAT: ${fmt(slotB.estVAT)}\n` : ''}${slotB.estTotal != null ? `Total: ${fmt(slotB.estTotal)}\n` : ''}${!chosenOption && chooseOptionToken ? `\nChoose Option B: ${siteBase}/api/quotes/${quoteId}/choose-option?option=B${tokenSuffix}\n` : ''}\n${customerNote ? `\nNote from our team: ${customerNote}\n` : ''}\nCall us: ${PHONE}\n\nMobile Tyre Vans\n${ADDRESS}`;
+    const textBody = `Hi ${customerName},\n\n${chosenOption ? `You have selected Option ${chosenOption}.` : 'We have prepared two options for you to compare. Please choose the one you prefer using the links below.'}\n\nReference: #${ref}\n\nOPTION A\n${vanTitle ? `Van: ${vanTitle}\n` : ''}${kitName ? `Pack: ${kitName}\n` : ''}${upgradeNames && upgradeNames.length > 0 ? `Upgrades:\n${upgradeNames.map(u => `  - ${u}`).join('\n')}\n` : ''}${extrasTextBlock}Subtotal: ${fmt(subtotal)}\nVAT: ${fmt(vat)}\nTotal: ${fmt(totalAfterDiscount)}\n${!chosenOption && chooseOptionToken ? `\nChoose Option A: ${siteBase}/api/quotes/${quoteId}/choose-option?option=A${tokenSuffix}\n` : ''}\nOPTION B\n${slotB.vanTitle ? `Van: ${slotB.vanTitle}\n` : ''}${slotB.kitName ? `Pack: ${slotB.kitName}\n` : ''}${slotB.upgradeNames && slotB.upgradeNames.length > 0 ? `Upgrades:\n${slotB.upgradeNames.map(u => `  - ${u}`).join('\n')}\n` : ''}${extrasTextBlock}${slotB.estSubtotal != null ? `Subtotal: ${fmt(slotB.estSubtotal)}\n` : ''}${slotB.estVAT != null ? `VAT: ${fmt(slotB.estVAT)}\n` : ''}${slotB.estTotal != null ? `Total: ${fmt(slotB.estTotal)}\n` : ''}${!chosenOption && chooseOptionToken ? `\nChoose Option B: ${siteBase}/api/quotes/${quoteId}/choose-option?option=B${tokenSuffix}\n` : ''}\n${customerNote ? `\nNote from our team: ${customerNote}\n` : ''}\nCall us: ${PHONE}\n\n${BRAND_NAME}\n${ADDRESS}`;
 
     await sendOrThrow(client, {
       to,
       from: fromEmail,
-      subject: `Your Van Conversion Options – Ref #${ref} – Mobile Tyre Vans`,
+      subject: `Your Van Conversion Options – Ref #${ref} – ${BRAND_NAME}`,
       html: emailLayout(compBodyHtml, {
         extraCss: specTableCss,
         footerNote: 'If you did not request this summary, please disregard this email.',
@@ -586,18 +588,18 @@ export async function sendQuoteSpecSummaryEmail({
     ${customerNote ? `<div class="note-box"><strong>Note from our team:</strong><br>${customerNote}</div>` : ''}
     ${approvalBlock}
     <p>If you have any questions or would like to make changes, please call us on <strong>${PHONE}</strong> or reply to this email.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
 
   await sendOrThrow(client, {
     to,
     from: fromEmail,
-    subject: `Your Van Conversion Summary – Ref #${ref} – Mobile Tyre Vans`,
+    subject: `Your Van Conversion Summary – Ref #${ref} – ${BRAND_NAME}`,
     html: emailLayout(singleBodyHtml, {
       extraCss: specTableCss,
       footerNote: 'If you did not request this summary, please disregard this email.',
     }),
-    text: `Hi ${customerName},\n\nThank you for speaking with us today. As discussed, please find below a summary of your configured mobile tyre van conversion.\n\nReference: #${ref}\n${vanTitle ? `Van: ${vanTitle}\n` : ''}${kitName ? `Pack: ${kitName}\n` : ''}${upgradeNames && upgradeNames.length > 0 ? `Upgrades:\n${upgradeNames.map(u => `  - ${u}`).join('\n')}\n` : ''}${extrasTextBlock}Subtotal (ex. VAT): ${fmt(subtotal)}\nVAT (20%): ${fmt(vat)}\n${discount && discount > 0 ? `Discount: -${fmt(discount)}\n` : ''}Total (inc. VAT): ${fmt(totalAfterDiscount)}\n${financeText}${customerNote ? `\nNote from our team: ${customerNote}\n` : ''}${approvalToken ? `\nSpec approval: ${siteBase}/spec-approval/${approvalToken}\n` : ''}\nCall us: ${PHONE}\n\nMobile Tyre Vans\n${ADDRESS}`,
+    text: `Hi ${customerName},\n\nThank you for speaking with us today. As discussed, please find below a summary of your configured mobile tyre van conversion.\n\nReference: #${ref}\n${vanTitle ? `Van: ${vanTitle}\n` : ''}${kitName ? `Pack: ${kitName}\n` : ''}${upgradeNames && upgradeNames.length > 0 ? `Upgrades:\n${upgradeNames.map(u => `  - ${u}`).join('\n')}\n` : ''}${extrasTextBlock}Subtotal (ex. VAT): ${fmt(subtotal)}\nVAT (20%): ${fmt(vat)}\n${discount && discount > 0 ? `Discount: -${fmt(discount)}\n` : ''}Total (inc. VAT): ${fmt(totalAfterDiscount)}\n${financeText}${customerNote ? `\nNote from our team: ${customerNote}\n` : ''}${approvalToken ? `\nSpec approval: ${siteBase}/spec-approval/${approvalToken}\n` : ''}\nCall us: ${PHONE}\n\n${BRAND_NAME}\n${ADDRESS}`,
   });
 }
 
@@ -720,7 +722,7 @@ export async function sendFinanceSubmissionEmail({
     ` : ''}
 
     <p style="margin-top:24px;">Please contact the customer directly to progress the finance application. If you have any questions, please reply to this email or call us on <strong>${PHONE}</strong>.</p>
-    <p>Kind regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Kind regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
 
   const financeText = financeDetails ? `\nFinance Details:\nPlan Type: ${financeDetails.planType}\nAPR: ${financeDetails.apr.toFixed(2)}%\nDeposit: ${fmt(financeDetails.depositAmount)}\nTerm: ${financeDetails.termMonths} months\nMonthly Payment: ${fmt(financeDetails.monthlyPayment)}\nWeekly Payment: ${fmt(financeDetails.weeklyPayment)}\n` : '';
@@ -730,7 +732,7 @@ export async function sendFinanceSubmissionEmail({
   for (const u of effectiveUpgradesText) specLines.push(`  - Upgrade: ${u.name}${u.price > 0 ? ` (${fmt(u.price)} ex. VAT)` : ''}`);
   for (const e of (customExtras || [])) specLines.push(`  - Bespoke Extra: ${e.description} (${fmt(e.pricePence)} ex. VAT)`);
   const specText = specLines.length > 0 ? `Conversion Specification (ex. VAT):\n${specLines.join('\n')}\n` : '';
-  const emailText = `Finance Application – Ref #${ref}\n\nCustomer Details:\nName: ${customerName}\nPhone: ${customerPhone}\nEmail: ${customerEmail}\n\nVehicle Details:\n${vanTitle ? `Van: ${vanTitle}\n` : ''}${vanRegistration ? `Registration: ${vanRegistration.toUpperCase()}\n` : ''}${vanMileage !== undefined && vanMileage !== null ? `Mileage: ${vanMileage.toLocaleString('en-GB')} miles\n` : ''}\n${specText}\nPricing:\n${discount && discount > 0 ? `Original Price (inc. VAT): ${fmt(total)}\nDiscount: -${fmt(discount)}\n` : ''}Subtotal (ex. VAT): ${fmt(subtotal)}\nVAT (20%): ${fmt(vat)}\nTotal (inc. VAT): ${fmt(totalAfterDiscount)}\n${financeText}\nMobile Tyre Vans | ${PHONE}\n${ADDRESS}`;
+  const emailText = `Finance Application – Ref #${ref}\n\nCustomer Details:\nName: ${customerName}\nPhone: ${customerPhone}\nEmail: ${customerEmail}\n\nVehicle Details:\n${vanTitle ? `Van: ${vanTitle}\n` : ''}${vanRegistration ? `Registration: ${vanRegistration.toUpperCase()}\n` : ''}${vanMileage !== undefined && vanMileage !== null ? `Mileage: ${vanMileage.toLocaleString('en-GB')} miles\n` : ''}\n${specText}\nPricing:\n${discount && discount > 0 ? `Original Price (inc. VAT): ${fmt(total)}\nDiscount: -${fmt(discount)}\n` : ''}Subtotal (ex. VAT): ${fmt(subtotal)}\nVAT (20%): ${fmt(vat)}\nTotal (inc. VAT): ${fmt(totalAfterDiscount)}\n${financeText}\n${BRAND_NAME} | ${PHONE}\n${ADDRESS}`;
 
   await sendOrThrow(client, {
     to: financeCompanyEmail,
@@ -909,7 +911,7 @@ export async function sendQuoteReceivedEmails({
     </div>` : ''}
     ` : ''}
     <p>If you have any questions in the meantime, please call us on <strong>${PHONE}</strong> or reply to this email.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
 
   if (!testMode || testMode.variant === 'customer') {
@@ -921,7 +923,7 @@ export async function sendQuoteReceivedEmails({
         extraCss: summaryTableCss,
         footerNote: 'If you did not submit this enquiry, please disregard this email.',
       }),
-      text: `Hi ${quote.userName},\n\nThank you for completing our van configurator. We've received your enquiry and will be in touch within 24 hours.\n\nReference: #${ref}\n${comparisonSlotB ? `\nOPTION A\n` : ''}${vanTitle ? `Van: ${vanTitle}\n` : ''}${kitName ? `Pack: ${kitName}\n` : ''}${upgradeNames && upgradeNames.length > 0 ? `Upgrades:\n${upgradeNames.map(u => `  - ${u}`).join('\n')}\n` : ''}${qrExtrasTextBlock}Subtotal: ${subtotal}\nVAT: ${vat}\n${discountFmt ? `Before discount: ${originalTotal}\nDiscount: -${discountFmt}\n` : ''}Total${discountAmountPence > 0 ? ' (after discount)' : ''}: ${total}\n${financeInfoA ? `Finance (10.9% APR): £${(financeInfoA.monthlyPayment/100).toFixed(2)}/month, £${(financeInfoA.weeklyPayment/100).toFixed(2)}/week (${financeInfoA.termMonths} months, £${(financeInfoA.depositAmount/100).toFixed(0)} deposit)\n` : ''}${comparisonSlotB ? `\nOPTION B\n${comparisonSlotB.vanTitle ? `Van: ${comparisonSlotB.vanTitle}\n` : ''}${comparisonSlotB.kitName ? `Pack: ${comparisonSlotB.kitName}\n` : ''}${qrExtrasTextBlock}${comparisonSlotB.estSubtotal != null ? `Subtotal: £${(comparisonSlotB.estSubtotal/100).toFixed(2)}\n` : ''}${comparisonSlotB.estVAT != null ? `VAT: £${(comparisonSlotB.estVAT/100).toFixed(2)}\n` : ''}${comparisonSlotB.estTotal != null ? `Total: £${(comparisonSlotB.estTotal/100).toFixed(2)}\n` : ''}${financeInfoB ? `Finance (10.9% APR): £${(financeInfoB.monthlyPayment/100).toFixed(2)}/month, £${(financeInfoB.weeklyPayment/100).toFixed(2)}/week (${financeInfoB.termMonths} months, £${(financeInfoB.depositAmount/100).toFixed(0)} deposit)\n` : ''}` : ''}\nCall us: ${PHONE}\n\nMobile Tyre Vans\n${ADDRESS}`,
+      text: `Hi ${quote.userName},\n\nThank you for completing our van configurator. We've received your enquiry and will be in touch within 24 hours.\n\nReference: #${ref}\n${comparisonSlotB ? `\nOPTION A\n` : ''}${vanTitle ? `Van: ${vanTitle}\n` : ''}${kitName ? `Pack: ${kitName}\n` : ''}${upgradeNames && upgradeNames.length > 0 ? `Upgrades:\n${upgradeNames.map(u => `  - ${u}`).join('\n')}\n` : ''}${qrExtrasTextBlock}Subtotal: ${subtotal}\nVAT: ${vat}\n${discountFmt ? `Before discount: ${originalTotal}\nDiscount: -${discountFmt}\n` : ''}Total${discountAmountPence > 0 ? ' (after discount)' : ''}: ${total}\n${financeInfoA ? `Finance (10.9% APR): £${(financeInfoA.monthlyPayment/100).toFixed(2)}/month, £${(financeInfoA.weeklyPayment/100).toFixed(2)}/week (${financeInfoA.termMonths} months, £${(financeInfoA.depositAmount/100).toFixed(0)} deposit)\n` : ''}${comparisonSlotB ? `\nOPTION B\n${comparisonSlotB.vanTitle ? `Van: ${comparisonSlotB.vanTitle}\n` : ''}${comparisonSlotB.kitName ? `Pack: ${comparisonSlotB.kitName}\n` : ''}${qrExtrasTextBlock}${comparisonSlotB.estSubtotal != null ? `Subtotal: £${(comparisonSlotB.estSubtotal/100).toFixed(2)}\n` : ''}${comparisonSlotB.estVAT != null ? `VAT: £${(comparisonSlotB.estVAT/100).toFixed(2)}\n` : ''}${comparisonSlotB.estTotal != null ? `Total: £${(comparisonSlotB.estTotal/100).toFixed(2)}\n` : ''}${financeInfoB ? `Finance (10.9% APR): £${(financeInfoB.monthlyPayment/100).toFixed(2)}/month, £${(financeInfoB.weeklyPayment/100).toFixed(2)}/week (${financeInfoB.termMonths} months, £${(financeInfoB.depositAmount/100).toFixed(0)} deposit)\n` : ''}` : ''}\nCall us: ${PHONE}\n\n${BRAND_NAME}\n${ADDRESS}`,
     });
   }
 
@@ -1095,21 +1097,21 @@ export async function sendLeadReceivedEmails(lead: {
   // 1. Customer confirmation
   const custBodyHtml = `
     <p>Hi ${lead.name},</p>
-    <p>Thank you for getting in touch with Mobile Tyre Vans. We've received your enquiry and one of our team will be in touch with you shortly.</p>
+    <p>Thank you for getting in touch with ${BRAND_NAME}. We've received your enquiry and one of our team will be in touch with you shortly.</p>
     <div class="ref-box">
       <p><strong>Your reference number:</strong> #${ref}</p>
       <p style="margin-top:6px; color:#6b7280; font-size:13px;">Please quote this reference in any correspondence with us.</p>
     </div>
     ${lead.message ? `<p><strong>Your message:</strong><br><em>"${lead.message}"</em></p>` : ''}
     <p>If you need to speak to us urgently, please call <strong>${PHONE}</strong>.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
 
   if (!lead.testMode || lead.testMode.variant === 'customer') {
     await sendOrThrow(client, {
       to: lead.email,
       from: fromEmail,
-      subject: `We've received your enquiry – Mobile Tyre Vans`,
+      subject: `We've received your enquiry – ${BRAND_NAME}`,
       html: emailLayout(custBodyHtml, {
         extraCss: `
           .ref-box { background: #f3f4f6; border-left: 4px solid ${BRAND_GREEN}; padding: 15px 20px; border-radius: 4px; margin: 20px 0; }
@@ -1117,7 +1119,7 @@ export async function sendLeadReceivedEmails(lead: {
         `,
         footerNote: 'If you did not submit this enquiry, please disregard this email.',
       }),
-      text: `Hi ${lead.name},\n\nThank you for getting in touch. We've received your enquiry and will be in touch shortly.\n\nReference: #${ref}\n${lead.message ? `Your message: "${lead.message}"\n` : ''}\nCall us: ${PHONE}\n\nMobile Tyre Vans\n${ADDRESS}`,
+      text: `Hi ${lead.name},\n\nThank you for getting in touch. We've received your enquiry and will be in touch shortly.\n\nReference: #${ref}\n${lead.message ? `Your message: "${lead.message}"\n` : ''}\nCall us: ${PHONE}\n\n${BRAND_NAME}\n${ADDRESS}`,
     });
   }
 
@@ -1170,7 +1172,7 @@ export async function sendNewUserWelcomeEmail({
 
   const bodyHtml = `
     <p>Hi ${displayName},</p>
-    <p>An account has been created for you on the Mobile Tyre Vans portal. You can use the details below to sign in.</p>
+    <p>An account has been created for you on the ${BRAND_NAME} portal. You can use the details below to sign in.</p>
     <div class="credentials-box">
       <table>
         <tr><td>Username</td><td>${username}</td></tr>
@@ -1181,13 +1183,13 @@ export async function sendNewUserWelcomeEmail({
       <a href="${loginUrl}" class="cta-btn">Sign In Now</a>
     </div>
     <p style="color:#6b7280; font-size:13px; margin-top:20px;">For your security, we recommend changing your password after your first login. If you have any trouble accessing your account, please call us on <strong>${PHONE}</strong> or reply to this email.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
 
   await sendOrThrow(client, {
     to: toEmail,
     from: fromEmail,
-    subject: `Your Mobile Tyre Vans account has been created`,
+    subject: `Your ${BRAND_NAME} account has been created`,
     html: emailLayout(bodyHtml, {
       extraCss: `
         .credentials-box { background: #f3f4f6; border: 1px solid #e5e7eb; border-radius: 4px; padding: 20px 24px; margin: 20px 0; }
@@ -1200,7 +1202,7 @@ export async function sendNewUserWelcomeEmail({
       `,
       footerNote: 'If you did not expect this email, please contact us immediately on ' + PHONE + '.',
     }),
-    text: `Hi ${displayName},\n\nAn account has been created for you on the Mobile Tyre Vans portal.\n\nUsername: ${username}\nPassword: ${password}\n\nSign in at: ${loginUrl}\n\nFor your security, we recommend changing your password after your first login.\n\nIf you need help, call us on ${PHONE}.\n\nMobile Tyre Vans\n${ADDRESS}`,
+    text: `Hi ${displayName},\n\nAn account has been created for you on the ${BRAND_NAME} portal.\n\nUsername: ${username}\nPassword: ${password}\n\nSign in at: ${loginUrl}\n\nFor your security, we recommend changing your password after your first login.\n\nIf you need help, call us on ${PHONE}.\n\n${BRAND_NAME}\n${ADDRESS}`,
   });
 }
 
@@ -1221,7 +1223,7 @@ export async function sendNewUserSetPasswordEmail({
 
   const bodyHtml = `
     <p>Hi ${displayName},</p>
-    <p>You've been set up as an admin on the <strong>Mobile Tyre Vans</strong> portal. To get started, you'll need to set your own password using the button below.</p>
+    <p>You've been set up as an admin on the <strong>${BRAND_NAME}</strong> portal. To get started, you'll need to set your own password using the button below.</p>
     <div class="info-box">
       <table>
         <tr><td>Username</td><td>${username}</td></tr>
@@ -1234,13 +1236,13 @@ export async function sendNewUserSetPasswordEmail({
     <p>If the button above doesn't work, copy and paste this link into your browser:</p>
     <p style="word-break:break-all; font-size:13px; color:#6b7280;">${setPasswordUrl}</p>
     <p>If you have any trouble, call us on <strong>${PHONE}</strong> or reply to this email.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
 
   await sendOrThrow(client, {
     to: toEmail,
     from: fromEmail,
-    subject: `You've been set up on Mobile Tyre Vans — set your password`,
+    subject: `You've been set up on ${BRAND_NAME} — set your password`,
     html: emailLayout(bodyHtml, {
       extraCss: `
         .info-box { background: #f3f4f6; border: 1px solid #e5e7eb; border-radius: 4px; padding: 20px 24px; margin: 20px 0; }
@@ -1253,7 +1255,7 @@ export async function sendNewUserSetPasswordEmail({
       `,
       footerNote: 'If you did not expect this email, please contact us on ' + PHONE + '.',
     }),
-    text: `Hi ${displayName},\n\nYou've been set up as an admin on the Mobile Tyre Vans portal.\n\nYour username is: ${username}\n\nTo activate your account, please set your password here:\n${setPasswordUrl}\n\nThis link expires in 24 hours.\n\nIf you need help, call us on ${PHONE}.\n\nMobile Tyre Vans\n${ADDRESS}`,
+    text: `Hi ${displayName},\n\nYou've been set up as an admin on the ${BRAND_NAME} portal.\n\nYour username is: ${username}\n\nTo activate your account, please set your password here:\n${setPasswordUrl}\n\nThis link expires in 24 hours.\n\nIf you need help, call us on ${PHONE}.\n\n${BRAND_NAME}\n${ADDRESS}`,
   });
 }
 
@@ -1281,13 +1283,13 @@ export async function sendPasswordResetEmail({
     <p style="color:#6b7280; font-size:13px;">If the button doesn't work, copy and paste this link into your browser:</p>
     <div class="url-box">${resetUrl}</div>
     <p style="color:#6b7280; font-size:13px;"><strong>This link will expire in 1 hour.</strong> If you did not request a password reset, you can safely ignore this email — your password will not change.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
 
   await sendOrThrow(client, {
     to: toEmail,
     from: fromEmail,
-    subject: `Reset your Mobile Tyre Vans password`,
+    subject: `Reset your ${BRAND_NAME} password`,
     html: emailLayout(bodyHtml, {
       extraCss: `
         .cta-btn { display: inline-block; background-color: ${BRAND_GREEN}; color: ${BRAND_DARK}; text-decoration: none; padding: 14px 32px; border-radius: 4px; font-weight: bold; font-size: 15px; margin: 20px 0; }
@@ -1295,7 +1297,7 @@ export async function sendPasswordResetEmail({
       `,
       footerNote: 'If you need help, call us on ' + PHONE + '.',
     }),
-    text: `Hi ${displayName},\n\nWe received a request to reset the password for your account (${username}).\n\nReset your password here:\n${resetUrl}\n\nThis link will expire in 1 hour.\n\nIf you did not request a password reset, you can safely ignore this email.\n\nMobile Tyre Vans\n${ADDRESS}`,
+    text: `Hi ${displayName},\n\nWe received a request to reset the password for your account (${username}).\n\nReset your password here:\n${resetUrl}\n\nThis link will expire in 1 hour.\n\nIf you did not request a password reset, you can safely ignore this email.\n\n${BRAND_NAME}\n${ADDRESS}`,
   });
 }
 
@@ -1455,7 +1457,7 @@ ${discount && discount > 0
   ? `Subtotal (ex. VAT): ${fmt(preDiscountSubtotal)}\nVAT (20%): ${fmt(preDiscountVAT)}\nList Price (inc. VAT): ${fmt(total)}\nDiscount: -${fmt(discount)}\nTotal Payable (inc. VAT): ${fmt(totalAfterDiscount)}`
   : `Subtotal (ex. VAT): ${fmt(subtotal)}\nVAT (20%): ${fmt(vat)}\nTotal (inc. VAT): ${fmt(totalAfterDiscount)}`}
 ${financeText}
-Mobile Tyre Vans | ${PHONE}
+${BRAND_NAME} | ${PHONE}
 ${ADDRESS}`;
 
   await sendOrThrow(client, {
@@ -1496,7 +1498,7 @@ export async function sendTestimonialRequestEmail({
 
   const bodyHtml = `
     <p>Hi ${customerName},</p>
-    <p>Thank you for choosing Mobile Tyre Vans. We hope you're delighted with your new mobile tyre van.</p>
+    <p>Thank you for choosing ${BRAND_NAME}. We hope you're delighted with your new mobile tyre van.</p>
     <p>We'd be really grateful if you could spare 2 minutes to leave us a quick review. It helps other people make confident decisions and means a lot to our team.</p>
     <div class="stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
     <div style="text-align:center;">
@@ -1508,7 +1510,7 @@ export async function sendTestimonialRequestEmail({
   await sendOrThrow(client, {
     to,
     from: fromEmail,
-    subject: `Would you leave us a review? – Mobile Tyre Vans`,
+    subject: `Would you leave us a review? – ${BRAND_NAME}`,
     html: emailLayout(bodyHtml, {
       extraCss: `
         .cta-btn { display: block; max-width: 260px; margin: 24px auto; background-color: ${BRAND_GREEN}; color: ${BRAND_DARK}; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-weight: bold; text-align: center; box-sizing: border-box; }
@@ -1659,7 +1661,7 @@ export async function sendEmailTypePreview(to: string, emailType: EmailPreviewTy
         </div>
         <p style="font-size:14px;color:#6b7280;margin-top:30px;">This confirmation link is for one-time use and will expire after confirmation.</p>
         <p>If you have any questions, please call us on <strong>${PHONE}</strong>.</p>
-        <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+        <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
       `;
       footerNote = "If you didn't request this quote, please disregard this email.";
       break;
@@ -1685,7 +1687,7 @@ export async function sendEmailTypePreview(to: string, emailType: EmailPreviewTy
           <tr class="total-row"><td>Total</td><td>${fmt(1750000)}</td></tr>
         </table>
         <p>If you have any questions in the meantime, please call us on <strong>${PHONE}</strong>.</p>
-        <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+        <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
       `;
       footerNote = `Call us anytime on ${PHONE} — we're happy to help.`;
       break;
@@ -1727,14 +1729,14 @@ export async function sendEmailTypePreview(to: string, emailType: EmailPreviewTy
       bodyHtml = `
         ${PREVIEW_BANNER}
         <p>Hi Sarah Johnson,</p>
-        <p>Thank you for getting in touch with Mobile Tyre Vans. We've received your message and will get back to you as soon as possible.</p>
+        <p>Thank you for getting in touch with ${BRAND_NAME}. We've received your message and will get back to you as soon as possible.</p>
         <div class="ref-box">
           <p><strong>Your reference number: #${DUMMY_REF}</strong></p>
           <p style="margin:6px 0 0;font-size:13px;color:#6b7280;">Please quote this if you contact us.</p>
         </div>
         <div style="background:#f9fafb;padding:15px;border-radius:4px;border-left:4px solid ${BRAND_GREEN};margin-top:16px;white-space:pre-wrap;font-size:14px;">I'm interested in finding out more about mobile tyre van conversions for our fleet. Could someone please give me a call?</div>
         <p>If you have any questions in the meantime, please call us on <strong>${PHONE}</strong>.</p>
-        <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+        <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
       `;
       footerNote = `Call us anytime on ${PHONE} — we're happy to help.`;
       break;
@@ -1762,11 +1764,11 @@ export async function sendEmailTypePreview(to: string, emailType: EmailPreviewTy
     }
 
     case 'new-user-welcome': {
-      subject = `[PREVIEW] Your Mobile Tyre Vans account has been created`;
+      subject = `[PREVIEW] Your ${BRAND_NAME} account has been created`;
       bodyHtml = `
         ${PREVIEW_BANNER}
         <p>Hi Alex,</p>
-        <p>An account has been created for you on the Mobile Tyre Vans portal. You can use the details below to sign in.</p>
+        <p>An account has been created for you on the ${BRAND_NAME} portal. You can use the details below to sign in.</p>
         <div class="credentials-box">
           <table>
             <tr><td>Username</td><td>alex.patel</td></tr>
@@ -1777,18 +1779,18 @@ export async function sendEmailTypePreview(to: string, emailType: EmailPreviewTy
           <a href="${baseUrl}/login" class="cta-btn">Sign In Now</a>
         </div>
         <p style="color:#6b7280;font-size:13px;margin-top:20px;">For your security, we recommend changing your password after your first login. If you have any trouble accessing your account, please call us on <strong>${PHONE}</strong> or reply to this email.</p>
-        <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+        <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
       `;
       footerNote = `If you did not expect this email, please contact us immediately on ${PHONE}.`;
       break;
     }
 
     case 'new-user-set-password': {
-      subject = `[PREVIEW] You've been set up on Mobile Tyre Vans — set your password`;
+      subject = `[PREVIEW] You've been set up on ${BRAND_NAME} — set your password`;
       bodyHtml = `
         ${PREVIEW_BANNER}
         <p>Hi Alex,</p>
-        <p>You've been set up as an admin on the <strong>Mobile Tyre Vans</strong> portal. To get started, you'll need to set your own password using the button below.</p>
+        <p>You've been set up as an admin on the <strong>${BRAND_NAME}</strong> portal. To get started, you'll need to set your own password using the button below.</p>
         <div class="credentials-box">
           <table>
             <tr><td>Username</td><td>alex.patel</td></tr>
@@ -1799,14 +1801,14 @@ export async function sendEmailTypePreview(to: string, emailType: EmailPreviewTy
         </p>
         <p style="color:#6b7280;font-size:13px;margin-top:0;">This link will expire in <strong>24 hours</strong>. If you weren't expecting this email, you can ignore it safely — no account access will be granted without setting a password.</p>
         <p>If you have any trouble, call us on <strong>${PHONE}</strong> or reply to this email.</p>
-        <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+        <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
       `;
       footerNote = `If you did not expect this email, please contact us on ${PHONE}.`;
       break;
     }
 
     case 'password-reset': {
-      subject = `[PREVIEW] Reset your Mobile Tyre Vans password`;
+      subject = `[PREVIEW] Reset your ${BRAND_NAME} password`;
       bodyHtml = `
         ${PREVIEW_BANNER}
         <p>Hi Alex,</p>
@@ -1815,25 +1817,25 @@ export async function sendEmailTypePreview(to: string, emailType: EmailPreviewTy
           <a href="${baseUrl}/reset-password/PREVIEW_TOKEN" class="cta-btn">Reset My Password</a>
         </p>
         <p style="color:#6b7280;font-size:13px;">This link will expire in <strong>1 hour</strong>. If you did not request a password reset, you can safely ignore this email — your password will not be changed.</p>
-        <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+        <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
       `;
       footerNote = "If you did not request this, no action is needed.";
       break;
     }
 
     case 'testimonial-request': {
-      subject = `[PREVIEW] How was your Mobile Tyre Vans experience?`;
+      subject = `[PREVIEW] How was your ${BRAND_NAME} experience?`;
       bodyHtml = `
         ${PREVIEW_BANNER}
         <p>Hi James,</p>
-        <p>We hope you're enjoying your new mobile tyre van setup. We'd love to hear about your experience with Mobile Tyre Vans!</p>
+        <p>We hope you're enjoying your new mobile tyre van setup. We'd love to hear about your experience with ${BRAND_NAME}!</p>
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p>Sharing your feedback helps other businesses like yours discover our service — and it means the world to us.</p>
         <div style="text-align:center;">
           <a href="https://g.page/r/PREVIEW_REVIEW_LINK" class="cta-btn">Leave a Review</a>
         </div>
         <p>It only takes a minute and we genuinely appreciate every review.</p>
-        <p>Thank you,<br><strong>Mobile Tyre Vans</strong></p>
+        <p>Thank you,<br><strong>${BRAND_NAME}</strong></p>
       `;
       footerNote = 'This link is personal to you and can only be used once.';
       break;
@@ -1901,7 +1903,7 @@ export async function sendEmailTypePreview(to: string, emailType: EmailPreviewTy
         </div>
         <p style="font-size:13px;color:#6b7280;text-align:center;margin-top:8px;">Or <a href="${baseUrl}/spec-approval/PREVIEW_TOKEN?status=rejected" style="color:#dc2626;">request changes</a> if anything needs adjusting.</p>
         <p>If you have any questions, please call us on <strong>${PHONE}</strong>.</p>
-        <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+        <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
       `;
       footerNote = "If you didn't request this specification, please call us on " + PHONE + ".";
       break;
@@ -2044,17 +2046,17 @@ export async function sendArtworkProofEmail({
       </a>
     </div>
     <p style="font-size:13px; color:#6b7280;">If you have any questions, please call us on <strong>${PHONE}</strong>.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
 
   await sendOrThrow(client, {
     to,
     from: fromEmail,
-    subject: `Artwork Proof Ready for Review — Mobile Tyre Vans`,
+    subject: `Artwork Proof Ready for Review — ${BRAND_NAME}`,
     html: emailLayout(bodyHtml, {
       footerNote: "If you did not request artwork from us, please disregard this email.",
     }),
-    text: `Hi ${customerName},\n\nYour artwork proof is ready for review.\n\n${adminNotes ? `Note from our team: ${adminNotes}\n\n` : ''}Please visit the link below to approve the artwork or request changes:\n\nApprove: ${approveUrl}\nRequest Changes: ${changesUrl}\n\nCall us: ${PHONE}\n\nMobile Tyre Vans\n${ADDRESS}`,
+    text: `Hi ${customerName},\n\nYour artwork proof is ready for review.\n\n${adminNotes ? `Note from our team: ${adminNotes}\n\n` : ''}Please visit the link below to approve the artwork or request changes:\n\nApprove: ${approveUrl}\nRequest Changes: ${changesUrl}\n\nCall us: ${PHONE}\n\n${BRAND_NAME}\n${ADDRESS}`,
   });
 }
 
@@ -2082,7 +2084,7 @@ export async function sendArtworkMessageToCustomer({
     <p>Hi ${customerName},</p>
     <p>A member of our graphics team has sent you a message about your artwork proof.</p>
     <div style="background:#f3f4f6; border-left:4px solid #8bc440; padding:16px; margin:20px 0; border-radius:4px;">
-      <p style="margin:0 0 6px; font-size:12px; color:#6b7280; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">${senderName} · Mobile Tyre Vans</p>
+      <p style="margin:0 0 6px; font-size:12px; color:#6b7280; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">${senderName} · ${BRAND_NAME}</p>
       <p style="margin:0; white-space:pre-wrap; color:#111827;">${message}</p>
     </div>
     <p>You can reply and view your artwork by clicking the button below.</p>
@@ -2093,17 +2095,17 @@ export async function sendArtworkMessageToCustomer({
       </a>
     </div>
     <p style="font-size:13px; color:#6b7280;">If you'd prefer to speak to someone, call us on <strong>${PHONE}</strong>.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
 
   await sendOrThrow(client, {
     to,
     from: fromEmail,
-    subject: `Message from Mobile Tyre Vans — Artwork Discussion`,
+    subject: `Message from ${BRAND_NAME} — Artwork Discussion`,
     html: emailLayout(bodyHtml, {
-      footerNote: "This message is regarding your artwork proof from Mobile Tyre Vans.",
+      footerNote: `This message is regarding your artwork proof from ${BRAND_NAME}.`,
     }),
-    text: `Hi ${customerName},\n\n${senderName} from Mobile Tyre Vans says:\n\n"${message}"\n\nView your artwork and reply: ${approvalUrl}\n\nCall us: ${PHONE}\n\nMobile Tyre Vans`,
+    text: `Hi ${customerName},\n\n${senderName} from ${BRAND_NAME} says:\n\n"${message}"\n\nView your artwork and reply: ${approvalUrl}\n\nCall us: ${PHONE}\n\n${BRAND_NAME}`,
   });
 }
 

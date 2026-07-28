@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { BRAND } from "@shared/brand";
 
 const DEFAULT_HERO_VIDEO = "/media/hero_vid_optimised.mp4";
 const CACHE_KEY = "heroVideoUrl";
@@ -111,7 +112,7 @@ export default function Hero() {
         <div className="container mx-auto px-4 py-14 sm:py-24">
           <div className="max-w-2xl">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-6 sm:mb-8 leading-tight text-white" data-testid="text-hero-headline">
-              Building Your Dream Mobile Tyre Business
+              {BRAND.vertical.heroTitle}
             </h1>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/configurator/van">

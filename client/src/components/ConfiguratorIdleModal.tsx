@@ -1,3 +1,4 @@
+import { BRAND } from "@shared/brand";
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -82,7 +83,7 @@ export default function ConfiguratorIdleModal() {
             className="w-full bg-[#8bc440e6] text-[#191919] hover:bg-[#8bc440] gap-2"
             data-testid="button-idle-open-ai"
           >
-            Chat with Max
+            Chat with {BRAND.assistantName}
             <ArrowRight className="w-4 h-4" />
           </Button>
 

@@ -2,7 +2,9 @@ import { emailLayout } from './email';
 
 const BRAND_GREEN = '#8bc440';
 const BRAND_DARK = '#191919';
-const SITE_DOMAIN = 'www.mobiletyrevans.co.uk';
+import { BRAND } from "@shared/brand";
+const SITE_DOMAIN = BRAND.domain;
+const BRAND_NAME = BRAND.name;
 const PHONE = '0800 000 0000';
 const ADDRESS = 'Unit 1, Example Business Park, Your Town, AA1 1AA';
 
@@ -69,20 +71,20 @@ export const LIVE_SEND_TEMPLATE_IDS = new Set([
 export const EMAIL_TEMPLATES: EmailTemplate[] = [
   { id: 'enquiry-received-customer', label: 'Enquiry Received (Customer)', description: 'Sent to the customer when they complete the configurator', subject: `We've received your enquiry – Ref #${REF}`, recipient: 'customer', group: 'Enquiry' },
   { id: 'enquiry-received-admin', label: 'Enquiry Received (Internal)', description: 'Admin notification of a new configurator submission', subject: `New configurator submission – ${CUSTOMER_NAME} – ${fmt(TOTAL)} – Ref #${REF}`, recipient: 'admin', group: 'Enquiry' },
-  { id: 'lead-received-customer', label: 'Lead Received (Customer)', description: 'Sent to customer when they submit a general enquiry form', subject: "We've received your enquiry – Mobile Tyre Vans", recipient: 'customer', group: 'Enquiry' },
+  { id: 'lead-received-customer', label: 'Lead Received (Customer)', description: 'Sent to customer when they submit a general enquiry form', subject: `We've received your enquiry – ${BRAND_NAME}`, recipient: 'customer', group: 'Enquiry' },
   { id: 'lead-received-admin', label: 'Lead Received (Internal)', description: 'Admin notification of a new general enquiry', subject: `New enquiry – ${CUSTOMER_NAME} – ${CUSTOMER_PHONE} – Ref #${REF}`, recipient: 'admin', group: 'Enquiry' },
-  { id: 'spec-summary-single', label: 'Spec Summary (Single Van)', description: 'Sent to customer after admin discusses their specification', subject: `Your Van Conversion Summary – Ref #${REF} – Mobile Tyre Vans`, recipient: 'customer', group: 'Spec' },
-  { id: 'spec-summary-comparison', label: 'Spec Summary (Comparison)', description: 'Spec summary with two options for the customer to choose between', subject: `Your Van Conversion Options – Ref #${REF} – Mobile Tyre Vans`, recipient: 'customer', group: 'Spec' },
+  { id: 'spec-summary-single', label: 'Spec Summary (Single Van)', description: 'Sent to customer after admin discusses their specification', subject: `Your Van Conversion Summary – Ref #${REF} – ${BRAND_NAME}`, recipient: 'customer', group: 'Spec' },
+  { id: 'spec-summary-comparison', label: 'Spec Summary (Comparison)', description: 'Spec summary with two options for the customer to choose between', subject: `Your Van Conversion Options – Ref #${REF} – ${BRAND_NAME}`, recipient: 'customer', group: 'Spec' },
   { id: 'option-chosen-admin', label: 'Option Chosen (Internal)', description: 'Admin notification when a customer selects their preferred option', subject: `Customer chose Option ${FIXTURE_CHOSEN_OPTION} – ${CUSTOMER_NAME} – Ref #${REF}`, recipient: 'admin', group: 'Spec' },
   { id: 'quote-confirmation', label: 'Quote Confirmation', description: 'Sent to customer with a formal quote and confirmation link', subject: `Your Van Conversion Quote #${REF} is Ready`, recipient: 'customer', group: 'Quote' },
-  { id: 'quote-spec-summary-single', label: 'Quote Spec Summary (Single Van)', description: 'Full spec summary sent after admin call — with discount, bespoke extras, and approval buttons', subject: `Your Van Conversion Summary – Ref #${REF} – Mobile Tyre Vans`, recipient: 'customer', group: 'Quote' },
-  { id: 'quote-spec-summary-comparison', label: 'Quote Spec Summary (Comparison)', description: 'Two-option A/B spec summary — shows Option B with a CHOSEN badge after the customer selects', subject: `Your Van Conversion Options – Ref #${REF} – Mobile Tyre Vans`, recipient: 'customer', group: 'Quote' },
+  { id: 'quote-spec-summary-single', label: 'Quote Spec Summary (Single Van)', description: 'Full spec summary sent after admin call — with discount, bespoke extras, and approval buttons', subject: `Your Van Conversion Summary – Ref #${REF} – ${BRAND_NAME}`, recipient: 'customer', group: 'Quote' },
+  { id: 'quote-spec-summary-comparison', label: 'Quote Spec Summary (Comparison)', description: 'Two-option A/B spec summary — shows Option B with a CHOSEN badge after the customer selects', subject: `Your Van Conversion Options – Ref #${REF} – ${BRAND_NAME}`, recipient: 'customer', group: 'Quote' },
   { id: 'finance-submission', label: 'Finance Submission', description: 'Sent to the finance company with customer and vehicle details', subject: `Finance Application – ${CUSTOMER_NAME} – ${fmt(TOTAL)} – Ref #${REF}`, recipient: 'finance', group: 'Finance' },
   { id: 'depot-invoice', label: 'Depot Invoice Request', description: 'Sent to the depot with full build spec for invoicing', subject: `Invoice Request – Quote #${REF} – ${CUSTOMER_NAME}`, recipient: 'depot', group: 'Post-Sale' },
-  { id: 'testimonial-request', label: 'Review Request', description: 'Sent to customer after their conversion is complete', subject: 'Would you leave us a review? – Mobile Tyre Vans', recipient: 'customer', group: 'Post-Sale' },
-  { id: 'welcome-email', label: 'New User Welcome', description: 'Sent to a new admin user with their login credentials', subject: 'Your Mobile Tyre Vans account has been created', recipient: 'admin', group: 'Account' },
-  { id: 'set-password', label: 'Set Password (New User)', description: 'Sent to a new admin user with a link to set their password', subject: "You've been set up on Mobile Tyre Vans — set your password", recipient: 'admin', group: 'Account' },
-  { id: 'password-reset', label: 'Password Reset', description: 'Sent when an admin user requests a password reset', subject: 'Reset your Mobile Tyre Vans password', recipient: 'admin', group: 'Account' },
+  { id: 'testimonial-request', label: 'Review Request', description: 'Sent to customer after their conversion is complete', subject: `Would you leave us a review? – ${BRAND_NAME}`, recipient: 'customer', group: 'Post-Sale' },
+  { id: 'welcome-email', label: 'New User Welcome', description: 'Sent to a new admin user with their login credentials', subject: `Your ${BRAND_NAME} account has been created`, recipient: 'admin', group: 'Account' },
+  { id: 'set-password', label: 'Set Password (New User)', description: 'Sent to a new admin user with a link to set their password', subject: `You've been set up on ${BRAND_NAME} — set your password`, recipient: 'admin', group: 'Account' },
+  { id: 'password-reset', label: 'Password Reset', description: 'Sent when an admin user requests a password reset', subject: `Reset your ${BRAND_NAME} password`, recipient: 'admin', group: 'Account' },
 ];
 
 const specTableCss = `
@@ -344,7 +346,7 @@ function generateEnquiryReceivedCustomer(): string {
       ` : ''}
     </table>
     <p>If you have any questions in the meantime, please call us on <strong>${PHONE}</strong> or reply to this email.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
   return emailLayout(body, {
     extraCss: `
@@ -408,14 +410,14 @@ function generateLeadReceivedCustomer(): string {
   const ref = id.slice(0, 8).toUpperCase();
   const body = `
     <p>Hi ${name},</p>
-    <p>Thank you for getting in touch with Mobile Tyre Vans. We've received your enquiry and one of our team will be in touch with you shortly.</p>
+    <p>Thank you for getting in touch with ${BRAND_NAME}. We've received your enquiry and one of our team will be in touch with you shortly.</p>
     <div class="ref-box">
       <p><strong>Your reference number:</strong> #${ref}</p>
       <p style="margin-top:6px; color:#6b7280; font-size:13px;">Please quote this reference in any correspondence with us.</p>
     </div>
     ${message ? `<p><strong>Your message:</strong><br><em>"${message}"</em></p>` : ''}
     <p>If you need to speak to us urgently, please call <strong>${PHONE}</strong>.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
   return emailLayout(body, {
     extraCss: `
@@ -498,7 +500,7 @@ function generateSpecSummarySingle(): string {
       </a>
     </div>
     <p>If you have any questions or would like to make changes, please call us on <strong>${PHONE}</strong> or reply to this email.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
   return emailLayout(body, {
     extraCss: specTableCss,
@@ -550,7 +552,7 @@ function generateSpecSummaryComparison(): string {
     ${optionBlock('B', comparisonSlotB.vanTitle, comparisonSlotB.kitName, comparisonSlotB.upgradeNames, comparisonSlotB.estSubtotal, comparisonSlotB.estVAT, comparisonSlotB.estTotal, comparisonSlotB.financeInfo)}
     ${customerNote ? `<div class="note-box"><strong>Note from our team:</strong><br>${customerNote}</div>` : ''}
     <p>If you have any questions, please call us on <strong>${PHONE}</strong> or reply to this email.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
   return emailLayout(body, {
     extraCss: specTableCss,
@@ -614,7 +616,7 @@ function generateQuoteConfirmation(): string {
     </div>
     <p style="font-size: 14px; color: #6b7280; margin-top: 30px;">This confirmation link is for one-time use and will expire after confirmation.</p>
     <p>If you have any questions, please call us on <strong>${PHONE}</strong>.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
   return emailLayout(body, {
     extraCss: `
@@ -674,7 +676,7 @@ function generateFinanceSubmission(): string {
     </table>
 
     <p style="margin-top:24px;">Please contact the customer directly to progress the finance application. If you have any questions, please reply to this email or call us on <strong>${PHONE}</strong>.</p>
-    <p>Kind regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Kind regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
   return emailLayout(body, {
     maxWidth: 650,
@@ -753,7 +755,7 @@ function generateTestimonialRequest(): string {
   const { customerName, reviewUrl } = TESTIMONIAL_REQUEST_TEST_ARGS;
   const body = `
     <p>Hi ${customerName},</p>
-    <p>Thank you for choosing Mobile Tyre Vans. We hope you're delighted with your new mobile tyre van.</p>
+    <p>Thank you for choosing ${BRAND_NAME}. We hope you're delighted with your new mobile tyre van.</p>
     <p>We'd be really grateful if you could spare 2 minutes to leave us a quick review. It helps other people make confident decisions and means a lot to our team.</p>
     <div class="stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
     <div style="text-align:center;">
@@ -775,7 +777,7 @@ function generateWelcomeEmail(): string {
   const displayName = firstName || username;
   const body = `
     <p>Hi ${displayName},</p>
-    <p>An account has been created for you on the Mobile Tyre Vans portal. You can use the details below to sign in.</p>
+    <p>An account has been created for you on the ${BRAND_NAME} portal. You can use the details below to sign in.</p>
     <div class="credentials-box">
       <table>
         <tr><td>Username</td><td>${username}</td></tr>
@@ -786,7 +788,7 @@ function generateWelcomeEmail(): string {
       <a href="${loginUrl}" class="cta-btn">Sign In Now</a>
     </div>
     <p style="color:#6b7280; font-size:13px; margin-top:20px;">For your security, we recommend changing your password after your first login. If you have any trouble accessing your account, please call us on <strong>${PHONE}</strong> or reply to this email.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
   return emailLayout(body, {
     extraCss: `
@@ -806,7 +808,7 @@ function generateSetPassword(): string {
   const displayName = firstName || username;
   const body = `
     <p>Hi ${displayName},</p>
-    <p>You've been set up as an admin on the <strong>Mobile Tyre Vans</strong> portal. To get started, you'll need to set your own password using the button below.</p>
+    <p>You've been set up as an admin on the <strong>${BRAND_NAME}</strong> portal. To get started, you'll need to set your own password using the button below.</p>
     <div class="info-box">
       <table>
         <tr><td>Username</td><td>${username}</td></tr>
@@ -819,7 +821,7 @@ function generateSetPassword(): string {
     <p>If the button above doesn't work, copy and paste this link into your browser:</p>
     <p style="word-break:break-all; font-size:13px; color:#6b7280;">${setPasswordUrl}</p>
     <p>If you have any trouble, call us on <strong>${PHONE}</strong> or reply to this email.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
   return emailLayout(body, {
     extraCss: `
@@ -847,7 +849,7 @@ function generatePasswordReset(): string {
     <p style="color:#6b7280; font-size:13px;">If the button doesn't work, copy and paste this link into your browser:</p>
     <div class="url-box">${resetUrl}</div>
     <p style="color:#6b7280; font-size:13px;"><strong>This link will expire in 1 hour.</strong> If you did not request a password reset, you can safely ignore this email — your password will not change.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
   return emailLayout(body, {
     extraCss: `
@@ -912,7 +914,7 @@ function generateQuoteSpecSummarySingle(): string {
       </a>
     </div>
     <p>If you have any questions or would like to make changes, please call us on <strong>${PHONE}</strong> or reply to this email.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
   return emailLayout(body, {
     extraCss: specTableCss,
@@ -990,7 +992,7 @@ function generateQuoteSpecSummaryComparison(): string {
     ${optionBlock('B', comparisonSlotB.vanTitle, comparisonSlotB.kitName, upgradesListB, comparisonSlotB.estSubtotal, comparisonSlotB.estVAT, comparisonSlotB.estTotal, comparisonSlotB.financeInfo)}
     ${customerNote ? `<div class="note-box"><strong>Note from our team:</strong><br>${customerNote}</div>` : ''}
     <p>If you have any questions, please call us on <strong>${PHONE}</strong> or reply to this email.</p>
-    <p>Best regards,<br><strong>Mobile Tyre Vans</strong></p>
+    <p>Best regards,<br><strong>${BRAND_NAME}</strong></p>
   `;
   return emailLayout(body, {
     extraCss: specTableCss,

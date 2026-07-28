@@ -9,6 +9,7 @@ import bcrypt from "bcryptjs";
 import { storage } from "./storage";
 import { setupAuth, isAuthenticated, isAdmin, isBasicAdmin, isFullAdmin, isFinanceUser, getCurrentUser } from "./auth";
 import { computeQuoteTotals, vanNetPrice, computeFinancePayments, VAT_RATE } from "@shared/pricing";
+import { BRAND, siteUrl as brandSiteUrl } from "@shared/brand";
 import rateLimit from "express-rate-limit";
 import { buildVanMeta } from "./seo";
 import { generateAiBlogPost } from "./blogGenerator";
@@ -2426,7 +2427,7 @@ Keep it professional, concise, and sales-focused. Do not include pricing or warr
         baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
       });
 
-      const systemPrompt = `You are the MTV Admin Assistant — an expert help agent embedded directly inside the Mobile Tyre Vans admin panel. You help staff use every feature of the system confidently.
+      const systemPrompt = `You are the ${BRAND.initials} Admin Assistant — an expert help agent embedded directly inside the ${BRAND.name} admin panel. You help staff use every feature of the system confidently.
 
 Your style: concise, practical, direct. Answer "how do I…" questions with clear numbered steps and exact menu names. Never waffle. If you're unsure, say so.
 
@@ -3149,7 +3150,7 @@ Always refer the user to the exact admin menu path when describing a feature. Ke
       const { randomBytes } = await import('crypto');
       const token = randomBytes(32).toString('hex');
       await storage.createTestimonialToken(token, customerName, customerEmail);
-      const SITE_URL = process.env.SITE_URL || 'https://www.mobiletyrevans.co.uk';
+      const SITE_URL = brandSiteUrl();
       const reviewUrl = `${SITE_URL}/testimonial/${token}`;
       const { sendTestimonialRequestEmail } = await import('./email.js');
       await sendTestimonialRequestEmail({ to: customerEmail, customerName, reviewUrl });
@@ -3915,7 +3916,7 @@ Always refer the user to the exact admin menu path when describing a feature. Ke
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${title} – Mobile Tyre Vans</title>
+  <title>${title} – ${BRAND.name}</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: Arial, sans-serif; background: ${brandDark}; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
@@ -3935,8 +3936,8 @@ Always refer the user to the exact admin menu path when describing a feature. Ke
 <body>
   <div class="card">
     <div class="card-header">
-      <h1>Mobile Tyre Vans</h1>
-      <p>www.mobiletyrevans.co.uk</p>
+      <h1>${BRAND.name}</h1>
+      <p>${BRAND.domain}</p>
     </div>
     <div class="card-body">
       <h2>${heading}</h2>
@@ -4139,7 +4140,7 @@ Always refer the user to the exact admin menu path when describing a feature. Ke
         `<p class="badge">Option ${option} Selected</p>
         <p>We've recorded your choice and our team has been notified. We'll be in touch shortly to discuss the next steps.</p>
         <p>Your reference is <strong>#${ref}</strong>.</p>
-        <p>If you have any questions in the meantime, please call us on <span class="phone">0800 000 0000</span> or email <a href="mailto:info@mobiletyrevans.co.uk" style="color:#8bc440">info@mobiletyrevans.co.uk</a>.</p>`,
+        <p>If you have any questions in the meantime, please call us on <span class="phone">${BRAND.phone}</span> or email <a href="mailto:${BRAND.infoEmail}" style="color:#8bc440">${BRAND.infoEmail}</a>.</p>`,
       ));
     } catch (error) {
       console.error('Error processing customer option choice:', error);
@@ -6501,7 +6502,7 @@ Disallow: /api/
 Disallow: /login
 Disallow: /portal/
 
-Sitemap: https://www.mobiletyrevans.co.uk/sitemap.xml
+Sitemap: ${brandSiteUrl()}/sitemap.xml
 `);
   });
 
@@ -6510,7 +6511,7 @@ Sitemap: https://www.mobiletyrevans.co.uk/sitemap.xml
   // ============================================================
   app.get('/sitemap.xml', async (_req, res) => {
     try {
-      const SITE_URL = 'https://www.mobiletyrevans.co.uk';
+      const SITE_URL = brandSiteUrl();
       const BUILD_DATE = new Date().toISOString().split('T')[0];
 
       const vanModelSlugs = [
@@ -6985,7 +6986,7 @@ ${blogEntries}
         : "POPULARITY INTELLIGENCE: Temporarily unavailable — use general best-practice recommendations.";
       console.debug(`[ai-chat] Popularity intel: ${popularityIntel?.totalMeaningfulQuotes ?? 0} quotes, 48V rate: ${popularityIntel?.rate48v ?? 0}%, top upgrades: ${popularityIntel?.allUpgradesOverall?.slice(0, 3).map(u => u.name).join(", ") ?? "none"}`);
 
-      const systemPrompt = `You are Max, the AI van builder for Mobile Tyre Vans, the UK's leading mobile tyre van conversion specialists based in the UK. Phone: 0800 000 0000. Website: www.mobiletyrevans.co.uk
+      const systemPrompt = `You are ${BRAND.assistantName}, the AI van builder for ${BRAND.name}, ${BRAND.vertical.conversionTerm} specialists in the UK. ${BRAND.vertical.aiContext} Phone: ${BRAND.phone}. Website: ${BRAND.domain}
 
 YOUR NAME: Max. Always refer to yourself as Max. Never describe yourself as an AI, bot, or assistant — you're Max, the van builder.
 
@@ -7045,7 +7046,7 @@ ${contactName ? `Since you already know the customer's name is "${contactName}",
 Q0 — NAME (skip this entirely if name is already captured above):
 Ask for the customer's name in a warm, natural way as part of your greeting. Always do this first — before asking about their van or purpose. Something like:
 
-"Hi there — I'm Max, the van builder for Mobile Tyre Vans. I'm going to ask you a few quick questions and put together a full, priced conversion spec for you — takes about 5 minutes. What's your name?"
+"Hi there — I'm ${BRAND.assistantName}, the van builder for ${BRAND.name}. I'm going to ask you a few quick questions and put together a full, priced conversion spec for you — takes about 5 minutes. What's your name?"
 
 Adapt the wording — don't be robotic — but always:
 1. Introduce yourself as Max
@@ -7437,7 +7438,7 @@ Only use IDs that appear in the lists above. Never invent IDs. Update config pro
             // No quote yet — create one
             let customVanDescription: string | null = null;
             if (cfg.ownVan === false && cfg.vanSize) {
-              customVanDescription = `${cfg.vanSize} van supplied by Mobile Tyre Vans`;
+              customVanDescription = `${cfg.vanSize} van supplied by ${BRAND.name}`;
             } else if (cfg.ownVan === true) {
               customVanDescription = "Customer's own van";
             }
@@ -9656,7 +9657,7 @@ Only use IDs that appear in the lists above. Never invent IDs. Update config pro
       const rawFiles: Array<{ url: string; name: string }> = Array.isArray(proof.files) ? proof.files : JSON.parse(proof.files);
 
       const siteBase = process.env.SITE_URL ||
-        (process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS.split(',')[0].trim()}` : 'https://www.mobiletyrevans.co.uk');
+        (process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS.split(',')[0].trim()}` : brandSiteUrl());
 
       // Generate presigned 7-day GET URLs so email clients can load the images
       // without needing authentication. GCS direct URLs require signed access.
@@ -9741,7 +9742,7 @@ Only use IDs that appear in the lists above. Never invent IDs. Update config pro
         try {
           const { sendArtworkMessageToCustomer } = await import('./email.js');
           const siteBase = process.env.SITE_URL ||
-            (process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS.split(',')[0].trim()}` : 'https://www.mobiletyrevans.co.uk');
+            (process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS.split(',')[0].trim()}` : brandSiteUrl());
           await sendArtworkMessageToCustomer({
             to: proof.customer_email,
             customerName: proof.customer_name,
@@ -9988,7 +9989,7 @@ Only use IDs that appear in the lists above. Never invent IDs. Update config pro
           <div style="font-family:Arial,sans-serif;max-width:580px;margin:0 auto;background:#fff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;">
             <div style="background:#191919;padding:16px 24px;">
               <h1 style="margin:0;font-size:17px;color:#8bc440;">Finance Partner Portal</h1>
-              <p style="margin:3px 0 0;font-size:12px;color:rgba(255,255,255,.5);">Mobile Tyre Vans</p>
+              <p style="margin:3px 0 0;font-size:12px;color:rgba(255,255,255,.5);">${BRAND.name}</p>
             </div>
             <div style="padding:24px;">
               <h2 style="margin:0 0 16px;font-size:15px;color:#111;">Finance decision updated</h2>

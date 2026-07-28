@@ -3,6 +3,7 @@ import { Phone, Mail, MapPin, Shield } from "lucide-react";
 import { SiFacebook, SiInstagram, SiTiktok, SiYoutube } from "react-icons/si";
 import logoImage from "@assets/mtv-logo.svg";
 import gajoLogo from "@assets/LOGO_1762356342150.webp";
+import { BRAND } from "@shared/brand";
 
 export default function Footer() {
   const quickLinks = [
@@ -27,10 +28,10 @@ export default function Footer() {
   const services = [
     "Van Conversions",
     "Equipment Supply",
-    "Finance Options", 
+    "Finance Options",
     "Nationwide Delivery",
     "After-Sales Support",
-    "Training & Support"
+    ...(BRAND.vertical.features.training ? ["Training & Support"] : []),
   ];
 
   return (
@@ -40,14 +41,14 @@ export default function Footer() {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="mb-4">
-              <img 
-                src={logoImage} 
-                alt="Mobile Tyre Vans" 
+              <img
+                src={logoImage}
+                alt={BRAND.name}
                 className="h-16 w-auto"
               />
             </div>
             <p className="text-primary-foreground/80 mb-4">
-              UK's leading mobile tyre van conversion specialists. Custom-built solutions for your mobile tyre business.
+              {BRAND.vertical.businessDescription}
             </p>
             <div className="flex gap-4">
               <a href="https://www.facebook.com/profile.php?id=61582819317320" target="_blank" rel="noopener noreferrer" aria-label="Facebook" data-testid="link-facebook" className="text-muted-foreground hover:text-accent transition-colors">
@@ -101,18 +102,18 @@ export default function Footer() {
             <div className="space-y-3">
               <div className="flex items-center space-x-2" data-testid="contact-phone">
                 <Phone className="w-4 h-4" />
-                <span className="text-primary-foreground/80">0800 000 0000</span>
+                <span className="text-primary-foreground/80">{BRAND.phone}</span>
               </div>
               <div className="flex items-center space-x-2" data-testid="contact-email">
                 <Mail className="w-4 h-4" />
-                <span className="text-primary-foreground/80">sales@mobiletyrevans.co.uk</span>
+                <span className="text-primary-foreground/80">{BRAND.salesEmail}</span>
               </div>
               <div className="flex items-start space-x-2" data-testid="contact-address">
                 <MapPin className="w-4 h-4 mt-0.5" />
                 <span className="text-primary-foreground/80">
-                  Unit 1, Example Business Park<br />
-                  the North West<br />
-                  AA1 1AA
+                  {BRAND.addressLines.map((line, i) => (
+                    <span key={i}>{line}{i < BRAND.addressLines.length - 1 && <br />}</span>
+                  ))}
                 </span>
               </div>
             </div>

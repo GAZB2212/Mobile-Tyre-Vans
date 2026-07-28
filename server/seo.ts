@@ -1,9 +1,12 @@
 import type { Request } from "express";
 import { vanModels } from "../client/src/pages/seo/data/vanModels";
 import { locations } from "../client/src/pages/seo/data/locations";
+import { BRAND, siteUrl } from "@shared/brand";
 
-export const SITE_URL = "https://www.mobiletyrevans.co.uk";
-export const SITE_NAME = "Mobile Tyre Vans";
+export const SITE_URL = siteUrl();
+export const SITE_NAME = BRAND.name;
+// Title-cased plural of the vertical's vehicle term, e.g. "Mobile Tyre Vans"
+const VEHICLES_TITLE = BRAND.vertical.vehicleTermPlural.replace(/\b\w/g, (c) => c.toUpperCase());
 
 declare global {
   namespace Express {
@@ -22,28 +25,28 @@ export interface PageMeta {
 
 export const staticRouteMeta: Record<string, PageMeta> = {
   "/": {
-    title: `Mobile Tyre Van Conversions UK | ${SITE_NAME}`,
-    description: "UK specialists in custom mobile tyre van conversions. Fully equipped builds, nationwide delivery, finance available. Based in the UK. Call 0800 000 0000.",
+    title: `${BRAND.vertical.seoTitle} | ${SITE_NAME}`,
+    description: `UK specialists in custom mobile tyre van conversions. Fully equipped builds, nationwide delivery, finance available. Based in the UK. Call ${BRAND.phone}.`,
     canonical: "/",
   },
   "/stock": {
-    title: `Mobile Tyre Vans For Sale UK | ${SITE_NAME}`,
-    description: "Mobile tyre vans for sale — professionally converted, fully equipped. UK-wide delivery and finance options available. Call 0800 000 0000.",
+    title: `${VEHICLES_TITLE} For Sale UK | ${SITE_NAME}`,
+    description: `Mobile tyre vans for sale — professionally converted, fully equipped. UK-wide delivery and finance options available. Call ${BRAND.phone}.`,
     canonical: "/stock",
   },
   "/configurator": {
     title: `Build Your Mobile Tyre Van | ${SITE_NAME}`,
-    description: "Build your mobile tyre van online. Choose your van, equipment kit and upgrades for an instant quote. UK-wide delivery. Call 0800 000 0000.",
+    description: `Build your mobile tyre van online. Choose your van, equipment kit and upgrades for an instant quote. UK-wide delivery. Call ${BRAND.phone}.`,
     canonical: "/configurator",
   },
   "/finance": {
     title: `Tyre Van Finance UK | ${SITE_NAME}`,
-    description: "Flexible finance for your mobile tyre van. Free calculator, competitive rates. FCA authorised credit broker. Monthly plans available. Call 0800 000 0000.",
+    description: `Flexible finance for your mobile tyre van. Free calculator, competitive rates. FCA authorised credit broker. Monthly plans available. Call ${BRAND.phone}.`,
     canonical: "/finance",
   },
   "/training": {
     title: `Tyre Fitting Training UK | ${SITE_NAME}`,
-    description: "REACT motorway certification and tyre fitting courses. Start your mobile tyre business legally and safely. UK-wide training. Call 0800 000 0000.",
+    description: `REACT motorway certification and tyre fitting courses. Start your mobile tyre business legally and safely. UK-wide training. Call ${BRAND.phone}.`,
     canonical: "/training",
   },
   "/gallery": {
@@ -53,12 +56,12 @@ export const staticRouteMeta: Record<string, PageMeta> = {
   },
   "/about": {
     title: `About Us | ${SITE_NAME}`,
-    description: "Meet the team at Mobile Tyre Vans, UK specialists in mobile tyre van conversions. Based in the UK, delivering nationwide. Call 0800 000 0000.",
+    description: `Meet the team at ${SITE_NAME}, UK specialists in mobile tyre van conversions. Based in the UK, delivering nationwide. Call 0800 000 0000.`,
     canonical: "/about",
   },
   "/contact": {
     title: `Contact Us | ${SITE_NAME}`,
-    description: "Call 0800 000 0000 or visit Unit 1, Example Business Park, Your Town AA1 1AA. Get a quote on your mobile tyre van conversion today.",
+    description: `Call ${BRAND.phone} or visit Unit 1, Example Business Park, Your Town AA1 1AA. Get a quote on your mobile tyre van conversion today.`,
     canonical: "/contact",
   },
   "/how-it-works": {
@@ -96,8 +99,8 @@ export function resolveStaticMeta(urlPath: string): PageMeta | null {
   // Van conversion hub page
   if (cleanPath === "/van-conversions") {
     return {
-      title: `Tyre Van Conversions UK | ${SITE_NAME}`,
-      description: "All major L3H3 panel vans converted for mobile tyre fitting — Ford Transit, Sprinter, Crafter and more. UK delivery, finance available. Call 0800 000 0000.",
+      title: `${BRAND.vertical.seoTitle} | ${SITE_NAME}`,
+      description: `All major L3H3 panel vans converted for mobile tyre fitting — Ford Transit, Sprinter, Crafter and more. UK delivery, finance available. Call ${BRAND.phone}.`,
       canonical: "/van-conversions",
     };
   }
@@ -119,7 +122,7 @@ export function resolveStaticMeta(urlPath: string): PageMeta | null {
   if (cleanPath === "/mobile-tyre-vans") {
     return {
       title: `Mobile Tyre Van Delivery UK | ${SITE_NAME}`,
-      description: "Mobile tyre van conversions delivered UK-wide. 76 areas covered from Liverpool to London. Finance available. Call 0800 000 0000.",
+      description: `Mobile tyre van conversions delivered UK-wide. 76 areas covered from Liverpool to London. Finance available. Call ${BRAND.phone}.`,
       canonical: "/mobile-tyre-vans",
     };
   }
@@ -130,7 +133,7 @@ export function resolveStaticMeta(urlPath: string): PageMeta | null {
     const location = locations.find((l) => l.slug === slug);
     if (location) {
       return {
-        title: `Mobile Tyre Vans in ${location.name} | ${SITE_NAME}`,
+        title: `${VEHICLES_TITLE} in ${location.name} | ${SITE_NAME}`,
         description: `Mobile tyre van delivered to ${location.name}, ${location.county}. Fully equipped L3H3 build, Euro 6. Finance available. Call 0800 000 0000.`,
         canonical: `/mobile-tyre-vans/${location.slug}`,
       };
@@ -182,7 +185,7 @@ export function injectMetaIntoHtml(html: string, meta: PageMeta): string {
     `<meta property="og:site_name" content="${SITE_NAME}" />`,
     `<meta property="og:locale" content="en_GB" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
-    `<meta name="twitter:site" content="@mobiletyrevans" />`,
+    `<meta name="twitter:site" content=BRAND.twitterHandle />`,
     `<meta name="twitter:title" content="${escapeHtml(meta.title)}" />`,
     `<meta name="twitter:description" content="${escapeHtml(meta.description)}" />`,
     `<meta name="twitter:image" content="${ogImage}" />`,
