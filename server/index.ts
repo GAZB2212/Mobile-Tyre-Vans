@@ -75,7 +75,7 @@ async function bootstrapAdmin() {
   try {
     const existingAdmin = await storage.getUserByUsername(resolvedUsername);
     if (!existingAdmin) {
-      await createUser({
+      const created = await createUser({
         username: resolvedUsername,
         password: resolvedPassword,
         email: "admin@mtv.example.com",
@@ -83,6 +83,10 @@ async function bootstrapAdmin() {
         lastName: "User",
         isAdmin: true,
       });
+      // createUser defaults adminRole to "none"; without this the bootstrap
+      // admin can log in but is locked out of the admin panel until the next
+      // restart hits the correction path below.
+      await storage.updateUser(created.id, { adminRole: "full" });
       log(`✅ Admin user created: ${resolvedUsername}`);
     } else {
       // Ensure the admin user always has the correct role
