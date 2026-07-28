@@ -1,0 +1,1 @@
+ALTER TABLE "quotes" ALTER COLUMN "kit_id" DROP NOT NULL;

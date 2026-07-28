@@ -1,0 +1,1 @@
+ALTER TABLE "quotes" ADD COLUMN "est_discount" integer DEFAULT 0 NOT NULL;

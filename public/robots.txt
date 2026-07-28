@@ -1,0 +1,54 @@
+User-agent: *
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /sitemap.xml
+
+# Disallow admin areas for all crawlers
+Disallow: /admin
+Disallow: /api/admin
+
+# AI crawlers — explicitly welcome on public content
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /admin
+Disallow: /api/admin
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /admin
+Disallow: /api/admin
+
+User-agent: anthropic-ai
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /admin
+Disallow: /api/admin
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /admin
+Disallow: /api/admin
+
+User-agent: cohere-ai
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /admin
+Disallow: /api/admin
+
+User-agent: Googlebot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /admin
+Disallow: /api/admin
+
+Sitemap: https://www.mobiletyrevans.co.uk/sitemap.xml

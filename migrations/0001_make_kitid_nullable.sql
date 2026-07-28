@@ -1,0 +1,1 @@
+-- Migration placeholder (already manually applied via execute_sql_tool)

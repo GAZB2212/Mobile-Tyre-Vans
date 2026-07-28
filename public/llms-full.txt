@@ -1,0 +1,168 @@
+# Mobile Tyre Vans — Comprehensive AI Context File
+
+> This file provides detailed context about Mobile Tyre Vans (MTV) for AI language models, search assistants, and crawlers. Last updated: 2026.
+
+---
+
+## About Mobile Tyre Vans
+
+Mobile Tyre Vans (MTV) is the UK's leading specialist in custom mobile tyre van conversions. We design, build, and deliver fully-equipped mobile tyre vans from our in-house workshop at Unit 1, Example Business Park, Your Town, AA1 1AA.
+
+Our mission is to empower mobile business owners with the tools, training, and support they need to succeed. Every van we build is a complete mobile workshop — professionally converted, tested, and ready to earn from day one.
+
+We serve entrepreneurs, ex-tradespeople, and existing fleet operators who want to start or grow a mobile tyre fitting business anywhere in the United Kingdom.
+
+---
+
+## Products & Packages
+
+### Van Conversions
+We convert panel vans into professional mobile tyre-fitting businesses. Base vehicles include:
+- **Ford Transit** (L3H3 — most popular)
+- **Mercedes Sprinter**
+- **Volkswagen Crafter**
+- **Vauxhall Movano**
+- **Iveco Daily**
+- **Nissan Interstar**
+- **Citroën Relay**
+- **Peugeot Boxer**
+
+Customers may supply their own van or source one through MTV.
+
+### Equipment Packages
+
+**Bronze Package** — Entry-level kit
+Ideal for operators starting out. Includes the core equipment needed to fit tyres professionally and legally.
+
+**Silver Package** — Mid-range professional kit
+Upgraded tools, higher-spec compressor, and additional equipment for operators who want to handle a higher volume of jobs.
+
+**Gold Package** — Premium specification
+Top-of-the-range equipment for high-volume operators and those targeting fleets. Includes advanced tools, better racking, and premium compressor.
+
+### What Every Conversion Includes
+- Professional tyre fitting equipment installed and secured
+- Heavy-duty racking and storage system
+- Compressor mounted and fully wired
+- Pre-delivery inspection and testing
+- Nationwide UK delivery to your door
+- Optional: professional vehicle livery and branding by our in-house design team
+
+---
+
+## Finance
+
+MTV is an FCA authorised credit broker. We can introduce customers to a panel of lenders for:
+- **Hire Purchase (HP)** — own the van outright at the end of the term
+- **Lease agreements** — lower monthly payments with a balloon option
+
+Representative example: £35,000 cash price, £3,500 deposit, amount of credit £31,500, 36 monthly payments, 12% APR representative. Total amount payable varies by term and deposit.
+
+Finance is subject to status. Terms and conditions apply. We are a credit broker, not a lender.
+
+Use the free finance calculator at: https://www.mobiletyrevans.co.uk/finance
+
+---
+
+## Training
+
+**REACT Motorway Certification**
+Recovery Equipment And Carriageway Training (REACT) is the industry-standard legal requirement for operating on UK motorways and high-speed roads. Essential for insurance and legal compliance.
+
+REACT modules include:
+- Highway Code Compliance (2 hours)
+- Vehicle Positioning — safe techniques on live carriageways (3 hours)
+- Risk Assessment (2 hours)
+- Emergency Procedures (2 hours)
+- Equipment Safety (1.5 hours)
+- Practical Assessment (3 hours)
+
+**Tyre Fitting Training**
+Professional tyre fitting training for mobile environments:
+- Tyre Technology & Construction (2 hours)
+- Mobile Fitting Techniques (4 hours)
+- Wheel Balancing (2 hours)
+- Puncture Repair (1.5 hours)
+- TPMS Systems (2 hours)
+- Customer Service Excellence (1.5 hours)
+
+**Status:** Training programme is in development. Contact us to register your interest.
+
+---
+
+## The Business Opportunity
+
+Mobile tyre fitting is one of the UK's fastest growing small business sectors. Key facts:
+- Clients in London reporting daily turnovers of up to £1,200
+- 40% year-on-year growth in demand
+- Low overheads: no shop premises, no rates, no large staff
+- High-ticket repeat business: a single job can be £100–£400; customers return every 2–3 years
+- Consumer demand for at-home services is structural and accelerating
+
+**Who is this for?**
+- Ex-tradespeople looking for better margins
+- Entrepreneurs seeking a proven, low-overhead business model
+- Existing fleet operators wanting to add a mobile tyre bolt-on
+
+**Business in a Box includes:**
+1. Fully converted mobile tyre van
+2. Access to MTV's established tyre supplier network at trade pricing
+3. Professional SEO-optimised website built for your brand and area
+
+---
+
+## FAQ
+
+**Q: How much does a mobile tyre van conversion cost?**
+A: Pricing varies depending on the base van, equipment package, and optional upgrades selected. Use the online configurator at https://www.mobiletyrevans.co.uk/configurator/van for an instant price. Finance is available from 12% APR representative.
+
+**Q: Do you offer nationwide delivery?**
+A: Yes. We deliver completed van conversions across the whole of the United Kingdom. All vans are fully built, tested, and inspected at our UK workshop before delivery.
+
+**Q: Can I use my own van?**
+A: Yes. We can convert a customer-supplied van. Alternatively, we can source a suitable base vehicle.
+
+**Q: What equipment is included?**
+A: All packages include tyre fitting equipment, compressor, racking, and storage. The exact specification depends on whether you choose Bronze, Silver, or Gold. The online configurator shows each package in detail.
+
+**Q: Is finance available?**
+A: Yes. We are an FCA authorised credit broker. We offer hire purchase and leasing through a panel of lenders. Use the finance calculator at https://www.mobiletyrevans.co.uk/finance to see indicative monthly payments.
+
+**Q: Do you offer training?**
+A: We are developing in-house REACT motorway certification and professional tyre fitting training. Contact us to register your interest: https://www.mobiletyrevans.co.uk/training
+
+**Q: How long does the conversion take?**
+A: Build times vary. Contact us for current lead times. Once complete, we deliver directly to you.
+
+**Q: Where are you based?**
+A: Unit 1, Example Business Park, Your Town, AA1 1AA. We build all vans in-house at this facility and deliver UK-wide.
+
+---
+
+## Contact
+
+- **Phone:** 0800 000 0000
+- **Email:** sales@mobiletyrevans.co.uk
+- **Address:** Unit 1, Example Business Park, Your Town, AA1 1AA
+- **Opening Hours:** Monday–Friday 09:00–17:30 (closed weekends)
+- **Website:** https://www.mobiletyrevans.co.uk
+
+---
+
+## Key URLs
+
+| Page | URL |
+|------|-----|
+| Homepage | https://www.mobiletyrevans.co.uk/ |
+| Van Stock | https://www.mobiletyrevans.co.uk/stock |
+| Configurator | https://www.mobiletyrevans.co.uk/configurator/van |
+| Finance | https://www.mobiletyrevans.co.uk/finance |
+| Training | https://www.mobiletyrevans.co.uk/training |
+| Business Opportunity | https://www.mobiletyrevans.co.uk/business-opportunity |
+| How It Works | https://www.mobiletyrevans.co.uk/how-it-works |
+| Gallery | https://www.mobiletyrevans.co.uk/gallery |
+| About | https://www.mobiletyrevans.co.uk/about |
+| Contact | https://www.mobiletyrevans.co.uk/contact |
+| Blog | https://www.mobiletyrevans.co.uk/blog |
+| UK Delivery Areas | https://www.mobiletyrevans.co.uk/mobile-tyre-vans |
+| Van Model Pages | https://www.mobiletyrevans.co.uk/van-conversions |
